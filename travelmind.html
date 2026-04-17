@@ -191,6 +191,136 @@ a{color:inherit;text-decoration:none;}
 .launch-btn:hover{opacity:.9;transform:translateY(-1px);}
 .launch-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;}
 .dur-badge{font-size:11px;color:var(--cyan);font-weight:600;background:rgba(6,182,212,.1);padding:2px 10px;border-radius:20px;border:1px solid rgba(6,182,212,.2);}
+.trip-type-row{display:flex;gap:3px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r8);padding:3px;height:42px;}
+.ttbtn{flex:1;border:none;border-radius:6px;background:transparent;color:var(--tm);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;padding:0 12px;}
+.ttbtn.active{background:rgba(59,130,246,.18);color:#93c5fd;box-shadow:inset 0 0 0 1px rgba(59,130,246,.28);}
+.ttbtn:hover:not(.active){color:var(--tp);}
+.pax-row{display:flex;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r8);padding:4px;height:42px;align-items:center;}
+.pax-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;}
+.pax-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--tm);}
+.pax-ctrl{display:flex;align-items:center;gap:3px;}
+.pax-btn{width:22px;height:22px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--ts);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;transition:all .15s;}
+.pax-btn:hover{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:#93c5fd;}
+.pax-btn:active{transform:scale(.92);}
+.pax-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+.pax-num{font-size:14px;font-weight:800;color:var(--tp);min-width:18px;text-align:center;font-family:'Syne',sans-serif;}
+
+/* UPLOAD ITINERARY */
+.upl-wrap{margin-bottom:14px;background:linear-gradient(135deg,rgba(139,92,246,.06),rgba(59,130,246,.04));border:1px dashed rgba(139,92,246,.25);border-radius:var(--r12);overflow:hidden;}
+.upl-wrap[open]{border-style:solid;}
+.upl-summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;align-items:center;gap:10px;user-select:none;}
+.upl-summary::-webkit-details-marker{display:none;}
+.upl-ico{font-size:18px;}
+.upl-title{font-size:13px;font-weight:600;color:var(--tp);flex:1;min-width:0;}
+.upl-hint{font-size:10px;color:var(--tm);padding:3px 9px;background:rgba(255,255,255,.04);border-radius:99px;border:1px solid var(--border);white-space:nowrap;}
+.upl-chev{font-size:14px;color:var(--tm);transition:transform .2s;}
+.upl-wrap[open] .upl-chev{transform:rotate(180deg);}
+.upl-body{padding:0 14px 14px;}
+.upl-drop{border:2px dashed var(--borderM);border-radius:var(--r12);padding:24px 16px;text-align:center;cursor:pointer;transition:all .18s;background:rgba(255,255,255,.015);}
+.upl-drop:hover,.upl-drop.drag{border-color:rgba(139,92,246,.5);background:rgba(139,92,246,.06);transform:translateY(-1px);}
+.upl-drop-ico{font-size:32px;margin-bottom:6px;}
+.upl-drop-main{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:3px;}
+.upl-drop-sub{font-size:11px;color:var(--tm);}
+.upl-paste{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--r8);padding:10px 12px;color:var(--tp);font-size:12px;font-family:'Inter',sans-serif;resize:vertical;transition:border-color .2s;}
+.upl-paste:focus{outline:none;border-color:rgba(139,92,246,.5);}
+.upl-paste::placeholder{color:var(--tm);}
+.upl-btn{height:36px;padding:0 16px;background:linear-gradient(135deg,#7c3aed,#2563eb);border:none;border-radius:var(--r8);color:white;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:opacity .2s,transform .15s;}
+.upl-btn:hover{opacity:.9;transform:translateY(-1px);}
+.upl-btn:disabled{opacity:.5;cursor:wait;transform:none;}
+.upl-status{font-size:12px;color:var(--ts);display:inline-flex;align-items:center;gap:6px;}
+.upl-status.err{color:var(--rose);}
+.upl-status.ok{color:var(--emerald);}
+.upl-spin{width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--violet);border-radius:50%;animation:geospin .6s linear infinite;display:inline-block;}
+.upl-result{margin-top:10px;}
+.upl-result:empty{display:none;}
+.upl-card{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.2);border-radius:var(--r8);padding:12px;margin-top:8px;}
+.upl-card-h{font-size:11px;font-weight:700;color:#34d399;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.upl-row{display:flex;gap:8px;font-size:12px;padding:4px 0;border-bottom:1px dashed rgba(255,255,255,.04);}
+.upl-row:last-child{border-bottom:none;}
+.upl-k{color:var(--tm);min-width:100px;font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.05em;padding-top:2px;}
+.upl-v{color:var(--tp);flex:1;}
+.upl-gencta{margin-top:10px;width:100%;height:42px;background:linear-gradient(135deg,#059669,#0891b2);border:none;border-radius:var(--r8);color:white;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .15s;}
+.upl-gencta:hover{opacity:.9;transform:translateY(-1px);}
+
+/* DEALS & OFFERS */
+.deals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:10px;}
+.deal-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r16);padding:16px;overflow:hidden;}
+.deal-sec-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:flex;align-items:center;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.deal-item{padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.04);}
+.deal-item:last-child{border-bottom:none;}
+.deal-airline{font-size:13px;font-weight:700;color:var(--tp);margin-bottom:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.deal-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(244,63,94,.15);color:#fb7185;border:1px solid rgba(244,63,94,.25);}
+.deal-off{font-size:12px;color:#f9a8d4;margin-bottom:4px;line-height:1.45;}
+.deal-meta{font-size:11px;color:var(--ts);line-height:1.6;}
+.deal-code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;padding:1px 7px;background:rgba(245,158,11,.12);border:1px dashed rgba(245,158,11,.4);color:#fbbf24;border-radius:4px;font-size:11px;font-weight:700;margin-right:6px;}
+.deal-cta{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.28);border-radius:6px;color:#93c5fd;font-size:11px;font-weight:600;margin-top:5px;text-decoration:none;}
+.deal-cta:hover{background:rgba(59,130,246,.2);}
+.deal-card-c{background:linear-gradient(135deg,rgba(139,92,246,.07),rgba(236,72,153,.05));border:1px solid rgba(139,92,246,.25);border-radius:10px;padding:12px;margin-bottom:8px;}
+.deal-card-h{font-size:13px;font-weight:700;color:var(--tp);margin-bottom:3px;}
+.deal-card-sub{font-size:11px;color:var(--ts);margin-bottom:6px;}
+.deal-card-bonus{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;margin-right:6px;margin-bottom:4px;}
+.deal-card-fee{display:inline-block;font-size:10px;color:var(--tm);padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.03);border:1px solid var(--border);margin-bottom:4px;}
+.deal-perks{list-style:none;padding:0;margin:4px 0 0;}
+.deal-perks li{font-size:11px;color:var(--ts);padding:2px 0 2px 16px;position:relative;line-height:1.5;}
+.deal-perks li::before{content:'✓';position:absolute;left:0;color:#34d399;font-weight:700;}
+.deal-tier-pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:99px;background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.3);margin-left:4px;}
+.deal-tip{display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.04);font-size:12px;color:var(--ts);line-height:1.5;}
+.deal-tip:last-child{border:none;}
+
+/* FLIGHT TRACKER */
+.track-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r16);padding:18px;margin-bottom:18px;}
+.track-hdr{font-size:13px;font-weight:700;color:var(--tp);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.track-form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;}
+.track-hint{font-size:10px;color:var(--tm);margin-top:10px;text-align:center;padding-top:10px;border-top:1px solid var(--border);}
+.track-result{background:var(--card);border:1px solid var(--border);border-radius:var(--r16);padding:18px;margin-top:14px;}
+.track-links{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.track-link{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 16px;background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(6,182,212,.15));border:1px solid rgba(59,130,246,.3);border-radius:var(--r8);color:#93c5fd;font-size:12px;font-weight:700;text-decoration:none;transition:all .18s;}
+.track-link:hover{transform:translateY(-1px);background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(6,182,212,.25));}
+.track-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0;}
+.track-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r8);padding:12px;}
+.track-stat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tm);margin-bottom:4px;}
+.track-stat-val{font-size:20px;font-weight:800;color:var(--tp);font-family:'Syne',sans-serif;}
+.track-stat-sub{font-size:10px;color:var(--ts);margin-top:2px;}
+.track-body h4{font-size:13px;color:var(--blue-l);margin:14px 0 6px;}
+.track-loading{display:flex;align-items:center;gap:10px;padding:14px;color:var(--ts);font-size:13px;}
+.track-loading::before{content:'';width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--blue-l);border-radius:50%;animation:geospin .6s linear infinite;}
+
+/* SAFETY & EMERGENCY */
+.emg-hero{background:linear-gradient(135deg,rgba(244,63,94,.1),rgba(239,68,68,.06));border:1px solid rgba(244,63,94,.28);border-radius:var(--r16);padding:18px;margin-bottom:14px;}
+.emg-hero-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#fb7185;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.emg-num-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;}
+.emg-num{background:rgba(15,23,42,.6);border:1px solid var(--borderM);border-radius:var(--r8);padding:10px 12px;transition:all .15s;}
+.emg-num:hover{border-color:rgba(244,63,94,.4);background:rgba(244,63,94,.05);}
+.emg-num-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tm);margin-bottom:2px;}
+.emg-num-val{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--tp);letter-spacing:-.01em;}
+.emg-num-val a{color:var(--tp);text-decoration:none;}
+.emg-num-val a:hover{color:#fca5a5;}
+.emg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;}
+.emg-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r16);padding:16px;}
+.emg-sec-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:flex;align-items:center;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.emg-item{padding:11px 0;border-bottom:1px dashed rgba(255,255,255,.04);}
+.emg-item:last-child{border-bottom:none;}
+.emg-name{font-size:13px;font-weight:700;color:var(--tp);margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.emg-chip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em;}
+.emg-chip.en{background:rgba(59,130,246,.15);color:#93c5fd;}
+.emg-chip.em{background:rgba(244,63,94,.15);color:#fb7185;}
+.emg-chip.kid{background:rgba(236,72,153,.15);color:#f9a8d4;}
+.emg-chip.ins{background:rgba(16,185,129,.15);color:#34d399;}
+.emg-chip.h24{background:rgba(245,158,11,.15);color:#fbbf24;}
+.emg-meta{font-size:11px;color:var(--ts);line-height:1.6;}
+.emg-meta a{color:#93c5fd;text-decoration:none;}
+.emg-meta a:hover{text-decoration:underline;}
+.emg-phone{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;color:#34d399;font-weight:600;}
+.emg-embassy{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(8,145,178,.05));border:1px solid rgba(59,130,246,.3);border-radius:var(--r12);padding:16px;margin-bottom:14px;}
+.emg-embassy-h{font-size:12px;font-weight:700;color:#93c5fd;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+.emg-embassy-name{font-size:15px;font-weight:700;color:var(--tp);margin-bottom:8px;}
+.emg-embassy-row{display:flex;gap:8px;font-size:12px;color:var(--ts);padding:4px 0;line-height:1.6;}
+.emg-embassy-row .lbl{min-width:90px;color:var(--tm);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-top:1px;}
+.emg-tip{display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.04);font-size:12px;color:var(--ts);line-height:1.55;}
+.emg-tip:last-child{border:none;}
+.emg-rating-card{background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(5,150,105,.04));border:1px solid rgba(16,185,129,.25);border-radius:var(--r8);padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.emg-rating-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#34d399;line-height:1;}
+.emg-rating-lbl{font-size:11px;color:var(--ts);line-height:1.5;}
 
 /* GEO SUGGEST DROPDOWN */
 .geo-sugg{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);border:1px solid var(--borderM);border-radius:var(--r8);box-shadow:var(--shadow-lg);z-index:50;max-height:280px;overflow-y:auto;display:none;}
@@ -504,6 +634,9 @@ a{color:inherit;text-decoration:none;}
       <div class="sb-section" style="margin-top:8px">Rates</div>
       <div class="nav-item" id="snav-rates" onclick="gotoPanel('rates',this)"><span class="nav-ico">💱</span>Live Exchange Rates</div>
       <div class="nav-item" id="snav-links" onclick="gotoPanel('links',this)"><span class="nav-ico">🔗</span>Book &amp; Contacts</div>
+      <div class="nav-item" id="snav-deals" onclick="gotoPanel('deals',this)"><span class="nav-ico">🎁</span>Deals &amp; Offers</div>
+      <div class="nav-item" id="snav-track" onclick="gotoPanel('track',this)"><span class="nav-ico">📡</span>Flight Tracker</div>
+      <div class="nav-item" id="snav-emergency" onclick="gotoPanel('emergency',this)"><span class="nav-ico">🚨</span>Safety &amp; Emergency</div>
       <div class="nav-item" id="snav-agency" onclick="gotoPanel('agency',this)"><span class="nav-ico">🏢</span>Travel Agencies</div>
       <div class="nav-item" id="snav-sim" onclick="gotoPanel('sim',this)"><span class="nav-ico">📱</span>SIM &amp; Connectivity</div>
       <div class="sb-section" style="margin-top:8px">History</div>
@@ -573,6 +706,35 @@ a{color:inherit;text-decoration:none;}
     <!-- TRIP PLANNER -->
     <div class="planner-card" id="plannerCard">
       <div class="planner-title">✈️ Plan Your Trip</div>
+
+      <!-- UPLOAD EXISTING ITINERARY -->
+      <details class="upl-wrap" id="uplWrap">
+        <summary class="upl-summary"><span class="upl-ico">📤</span><span class="upl-title">Already have a travel plan? Upload it — AI will parse everything</span><span class="upl-hint">Email · Excel · PDF · Word · Image · Text</span><span class="upl-chev">▾</span></summary>
+        <div class="upl-body">
+          <div class="upl-drop" id="uplDrop"
+               ondragover="event.preventDefault();this.classList.add('drag')"
+               ondragleave="this.classList.remove('drag')"
+               ondrop="event.preventDefault();this.classList.remove('drag');handleUploadFiles(event.dataTransfer.files)"
+               onclick="document.getElementById('uplFile').click()">
+            <input type="file" id="uplFile" style="display:none" multiple accept=".pdf,.xlsx,.xls,.csv,.docx,.txt,.eml,.msg,.rtf,.png,.jpg,.jpeg,.webp,.heic" onchange="handleUploadFiles(this.files)"/>
+            <div class="upl-drop-ico">📥</div>
+            <div class="upl-drop-main">Drop your itinerary here or click to browse</div>
+            <div class="upl-drop-sub">Supports PDF · Excel (.xlsx) · Word (.docx) · Email (.eml) · Text · Images (JPG/PNG)</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin:10px 0 8px;">
+            <div style="flex:1;height:1px;background:var(--border)"></div>
+            <span style="font-size:10px;color:var(--tm);text-transform:uppercase;letter-spacing:.1em">or paste text</span>
+            <div style="flex:1;height:1px;background:var(--border)"></div>
+          </div>
+          <textarea id="uplPaste" class="upl-paste" rows="3" placeholder="Paste an email body, itinerary text, or any trip description here — AI will extract destinations, dates, and plan details…"></textarea>
+          <div style="display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap">
+            <button class="upl-btn" id="uplAnalyzeBtn" onclick="analyzePastedText()">🤖 Analyze Pasted Text</button>
+            <span class="upl-status" id="uplStatus"></span>
+          </div>
+          <div id="uplResult" class="upl-result"></div>
+        </div>
+      </details>
+
       <div style="display:flex;flex-direction:column;gap:12px;">
         <!-- Row 1: From → To -->
         <div class="planner-row">
@@ -596,15 +758,50 @@ a{color:inherit;text-decoration:none;}
             </div>
           </div>
         </div>
-        <!-- Row 2: Dates + Profile + Launch -->
+        <!-- Row 2: Trip Type + Dates + Profile + Launch -->
         <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+          <div class="pfield" style="min-width:170px">
+            <div class="pfield-label">🎫 Trip Type</div>
+            <div class="trip-type-row">
+              <button class="ttbtn active" id="ttRound" onclick="setTripType('round')">🔄 Round-trip</button>
+              <button class="ttbtn" id="ttOne" onclick="setTripType('one')">➡️ One-way</button>
+            </div>
+          </div>
           <div class="pfield" style="min-width:150px">
             <div class="pfield-label">📅 Departure</div>
             <input class="dateinp" type="date" id="dFrom" onchange="calcDur()"/>
           </div>
-          <div class="pfield" style="min-width:150px">
+          <div class="pfield" id="returnField" style="min-width:150px">
             <div class="pfield-label">📅 Return</div>
             <input class="dateinp" type="date" id="dTo" onchange="calcDur()"/>
+          </div>
+          <div class="pfield" id="nightsField" style="min-width:130px;display:none">
+            <div class="pfield-label">🌙 Stay Duration</div>
+            <div class="pinp-wrap">
+              <span class="pinp-ico">🛏</span>
+              <input class="pinp" id="dNights" type="number" min="1" max="90" value="7" placeholder="Nights" onchange="calcDur()"/>
+            </div>
+          </div>
+          <div class="pfield" style="min-width:240px">
+            <div class="pfield-label">👥 Passengers</div>
+            <div class="pax-row">
+              <div class="pax-group">
+                <div class="pax-label">👤 Adults</div>
+                <div class="pax-ctrl">
+                  <button class="pax-btn" onclick="changePax('adults',-1)" type="button">−</button>
+                  <span class="pax-num" id="paxAdults">1</span>
+                  <button class="pax-btn" onclick="changePax('adults',1)" type="button">+</button>
+                </div>
+              </div>
+              <div class="pax-group">
+                <div class="pax-label">🧒 Kids &lt;12</div>
+                <div class="pax-ctrl">
+                  <button class="pax-btn" onclick="changePax('children',-1)" type="button">−</button>
+                  <span class="pax-num" id="paxChildren">0</span>
+                  <button class="pax-btn" onclick="changePax('children',1)" type="button">+</button>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="pfield" style="flex:1;min-width:200px;">
             <div class="pfield-label">👤 Traveler Profile</div>
@@ -644,6 +841,9 @@ a{color:inherit;text-decoration:none;}
       <button class="ctab" id="ctab-agency" onclick="sw('agency')">🏢 Agencies</button>
       <button class="ctab" id="ctab-sim" onclick="sw('sim')">📱 SIM</button>
       <button class="ctab" id="ctab-links" onclick="sw('links')">🔗 Book</button>
+      <button class="ctab" id="ctab-deals" onclick="sw('deals')" style="color:#f9a8d4">🎁 Deals</button>
+      <button class="ctab" id="ctab-track" onclick="sw('track')" style="color:#93c5fd">📡 Flight Tracker</button>
+      <button class="ctab" id="ctab-emergency" onclick="sw('emergency')" style="color:#fb7185">🚨 Safety</button>
       <button class="ctab" onclick="exportFullReportPDF()" style="margin-left:auto;background:linear-gradient(135deg,rgba(29,78,216,.35),rgba(8,145,178,.35));border:1px solid rgba(59,130,246,.55);color:#bfdbfe;font-weight:700">📄 Download PDF Report</button>
     </div>
 
@@ -748,17 +948,35 @@ a{color:inherit;text-decoration:none;}
           </div>
         </div>
         <div class="chat-sidebar">
-          <div class="qs-title">Quick Questions</div>
+          <div class="qs-title">✈️ Flights &amp; Booking</div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <button class="q-btn" onclick="askQ('Which airline offers the best value on this route — factoring price, baggage, comfort and on-time reliability?')">✈️ Best value airline?</button>
+            <button class="q-btn" onclick="askQ('Compare baggage allowances across the main airlines flying this route — cabin and checked.')">🧳 Compare baggage</button>
+            <button class="q-btn" onclick="askQ('When is the cheapest time to book this flight? Weekday vs weekend, how many weeks in advance, and best tools to track fare drops.')">💰 Best time to book?</button>
+            <button class="q-btn" onclick="askQ('Compare economy vs premium economy vs business on this route — price gap and is it worth upgrading?')">💺 Cabin upgrade worth it?</button>
+            <button class="q-btn" onclick="askQ('What are the layover options? Which transit airports are fastest, cheapest, and which should I avoid?')">🔄 Layover options</button>
+          </div>
+          <div class="qs-title" style="margin-top:12px">🏨 Hotels &amp; Stay</div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <button class="q-btn" onclick="askQ('Which neighborhood should I stay in for first-time visitor, nightlife, family, or budget — give pros and cons of each.')">📍 Best neighborhood?</button>
+            <button class="q-btn" onclick="askQ('Booking.com vs Agoda vs Hotels.com vs direct — which gives the lowest price for this city and why?')">🏨 Best booking site?</button>
+            <button class="q-btn" onclick="askQ('Are there any hidden resort fees, city tax, or surprise charges I should know about for hotels here?')">⚠️ Hidden hotel fees?</button>
+            <button class="q-btn" onclick="askQ('Airbnb vs hotel for this destination — which is better for my profile, and what neighborhoods work best for each?')">🏠 Airbnb vs hotel?</button>
+          </div>
+          <div class="qs-title" style="margin-top:12px">🌍 Trip Planning</div>
           <div style="display:flex;flex-direction:column;gap:5px;">
             <button class="q-btn" onclick="askQ('Best time of year to visit?')">📅 Best time to visit?</button>
             <button class="q-btn" onclick="askQ('What is the typical daily budget for a mid-range traveler?')">💰 Daily budget estimate?</button>
             <button class="q-btn" onclick="askQ('What cultural norms and etiquette should I know?')">🙏 Cultural etiquette?</button>
             <button class="q-btn" onclick="askQ('Is it safe? Any safety tips for tourists?')">🛡 Safety tips?</button>
-            <button class="q-btn" onclick="askQ('What are must-buy souvenirs and local specialties?')">🛍 Shopping tips?</button>
             <button class="q-btn" onclick="askQ('What travel apps should I download?')">📱 Must-have apps?</button>
             <button class="q-btn" onclick="askQ('What tourist mistakes should I avoid?')">⚠️ Common mistakes?</button>
-            <button class="q-btn" onclick="askQ('What are the most eco-friendly ways to travel?')">🌱 Eco travel tips?</button>
-            <button class="q-btn" onclick="sw('budget')">💰 Open Budget Planner →</button>
+          </div>
+          <div class="qs-title" style="margin-top:12px">Shortcuts</div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <button class="q-btn" onclick="sw('deals')">🎁 View Deals &amp; Offers →</button>
+            <button class="q-btn" onclick="sw('track')">📡 Flight Tracker →</button>
+            <button class="q-btn" onclick="sw('budget')">💰 Budget Planner →</button>
           </div>
           <div class="qs-title">Agent Status</div>
           <div id="agentMini"><div style="font-size:12px;color:var(--tm);font-style:italic">No agents active</div></div>
@@ -774,6 +992,47 @@ a{color:inherit;text-decoration:none;}
     <div class="panel" id="panel-links"><div id="linksContent"><div class="empty"><div class="empty-ico">🔗</div><div class="empty-title">Run a trip plan first</div></div></div></div>
     <div class="panel" id="panel-agency"><div id="agencyContent"><div class="empty"><div class="empty-ico">🏢</div><div class="empty-title">Run a trip plan first</div></div></div></div>
     <div class="panel" id="panel-sim"><div id="simContent"><div class="empty"><div class="empty-ico">📱</div><div class="empty-title">Run a trip plan first</div></div></div></div>
+
+    <!-- DEALS & OFFERS -->
+    <div class="panel" id="panel-deals"><div id="dealsContent"><div class="empty"><div class="empty-ico">🎁</div><div class="empty-title">Deals & Offers appear after agents complete</div><div class="empty-sub">Airline sale fares · Co-branded credit card offers · Loyalty program sweet spots · Lounge access · Baggage perks · Flash sale sources · Hotel loyalty programs.</div></div></div></div>
+
+    <!-- FLIGHT TRACKER -->
+    <div class="panel" id="panel-track">
+      <div style="max-width:880px">
+        <div class="section-title" style="margin-bottom:14px">📡 Flight Tracker · On-Time Performance</div>
+        <div class="track-card">
+          <div class="track-hdr">Check flight status &amp; 7-day on-time history</div>
+          <div class="track-form">
+            <div class="pfield" style="flex:1;min-width:200px">
+              <div class="pfield-label">✈️ Airline</div>
+              <div class="pinp-wrap">
+                <span class="pinp-ico">🛫</span>
+                <input class="pinp" id="trkAirline" list="airlineList" placeholder="Type or pick airline…" autocomplete="off"/>
+                <datalist id="airlineList">
+                  <option value="Emirates · EK"></option><option value="Etihad · EY"></option><option value="Qatar Airways · QR"></option><option value="Turkish Airlines · TK"></option><option value="British Airways · BA"></option><option value="Air France · AF"></option><option value="KLM · KL"></option><option value="Lufthansa · LH"></option><option value="Swiss · LX"></option><option value="Austrian · OS"></option><option value="Iberia · IB"></option><option value="Singapore Airlines · SQ"></option><option value="Cathay Pacific · CX"></option><option value="ANA · NH"></option><option value="JAL · JL"></option><option value="Korean Air · KE"></option><option value="Thai Airways · TG"></option><option value="Air India · AI"></option><option value="IndiGo · 6E"></option><option value="flydubai · FZ"></option><option value="Air Arabia · G9"></option><option value="Saudia · SV"></option><option value="EgyptAir · MS"></option><option value="Royal Jordanian · RJ"></option><option value="Kuwait Airways · KU"></option><option value="Oman Air · WY"></option><option value="American Airlines · AA"></option><option value="Delta · DL"></option><option value="United · UA"></option><option value="Southwest · WN"></option><option value="JetBlue · B6"></option><option value="Alaska · AS"></option><option value="Air Canada · AC"></option><option value="Qantas · QF"></option><option value="Virgin Atlantic · VS"></option><option value="Ryanair · FR"></option><option value="easyJet · U2"></option><option value="Wizz Air · W6"></option>
+                </datalist>
+              </div>
+            </div>
+            <div class="pfield" style="flex:1;min-width:180px">
+              <div class="pfield-label">🔢 Flight Number</div>
+              <div class="pinp-wrap">
+                <span class="pinp-ico">#️⃣</span>
+                <input class="pinp" id="trkFlight" placeholder="e.g., 237, EK237" onkeydown="if(event.key==='Enter')checkFlight()" autocomplete="off"/>
+              </div>
+            </div>
+            <button class="launch-btn" onclick="checkFlight()" style="align-self:flex-end;margin-bottom:1px">
+              <span>🔍</span><span>Check Status</span>
+            </button>
+          </div>
+          <div class="track-hint">Live tracking via FlightAware, FlightRadar24 &amp; Google Flights · 7-day performance summary powered by Claude</div>
+        </div>
+        <div id="trackResult"></div>
+      </div>
+    </div>
+
+    <!-- SAFETY & EMERGENCY -->
+    <div class="panel" id="panel-emergency"><div id="emergencyContent"><div class="empty"><div class="empty-ico">🚨</div><div class="empty-title">Safety & Emergency info appears after agents complete</div><div class="empty-sub">Hospitals with 24/7 ER · Pharmacies open around the clock · Your embassy's emergency contacts · Vaccination requirements · Common scams to avoid · Lost passport recovery steps.</div></div></div></div>
+
     <!-- HISTORY -->
     <div class="panel" id="panel-history">
       <div id="historyContent"></div>
@@ -908,7 +1167,7 @@ function openSettings(){alert('Settings panel coming soon.');const m=document.ge
 /* ═══════════════════════════════════
    APP STATE
 ═══════════════════════════════════ */
-let KEY='',DEST='',FROM='',DESTS=[],PROFILE='solo';
+let KEY='',DEST='',FROM='',DESTS=[],PROFILE='solo',TRIP_TYPE='round',ADULTS=1,CHILDREN=0;
 let AS={},CH=[],mapInst=null,LIVE_RATES={},_BDG=null,BDG_P='solo',BDG_T='mid_hotel';
 
 /* ═══════════════════════════════════
@@ -1009,7 +1268,7 @@ function openSidebar(){document.getElementById('sidebar').classList.add('open');
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sbOverlay').classList.remove('show');}
 function gotoPanel(name,el){sw(name);}
 function sw(name){
-  const panels=['dash','itin','budget','map','gal','chat','rates','history','agency','sim','links'];
+  const panels=['dash','itin','budget','map','gal','chat','rates','history','agency','sim','links','deals','track','emergency'];
   panels.forEach(p=>{
     const panel=document.getElementById('panel-'+p);if(panel)panel.classList.toggle('active',p===name);
     const ctab=document.getElementById('ctab-'+p);if(ctab)ctab.classList.toggle('active',p===name);
@@ -1019,6 +1278,8 @@ function sw(name){
   if(name==='rates')renderRatesPanel();
   if(name==='history')renderHistory();
   if(name==='links')renderLinksPanel();
+  if(name==='deals')renderDealsPanel();
+  if(name==='emergency')renderEmergencyPanel();
   if(name==='agency'||name==='sim'){var _s=AS[name]||{};var _el=document.getElementById(name+'Content');if(_el){if(_s.status==='done'&&_s.content){_el.innerHTML='<div style="padding:16px;font-size:13px;color:var(--ts);line-height:1.85">'+bHTML(_s,AGENTS.find(function(a){return a.id===name;}))+'</div>';}else{_el.innerHTML='<div class="empty"><div class="empty-ico">'+(name==='agency'?'🏢':'📱')+'</div><div class="empty-title">'+(_s.status==='running'?'Researching...':'Run a trip plan first')+'</div></div>';}}}
   closeSidebar();
 }
@@ -1124,6 +1385,73 @@ function geoPick(inpId,idx){
 }
 function escapeHTML(s){return(s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escapeAttr(s){return escapeHTML(s).replace(/"/g,'&quot;');}
+
+// Tolerant JSON parser — handles truncated, markdown-wrapped, or malformed JSON from AI
+function parseTolerantJSON(text){
+  if(!text||!String(text).trim())throw new Error('Empty input');
+  var s=String(text).replace(/```json|```/gi,'').trim();
+  // Strip any HTML that may have wrapped the JSON
+  s=s.replace(/<[^>]+>/g,' ');
+  var si=s.indexOf('{');if(si<0)throw new Error('No JSON object found');
+  s=s.slice(si);
+  // Fast path — try normal parse with trailing-comma fix
+  try{return JSON.parse(s.replace(/,(\s*[}\]])/g,'$1'));}catch(e){}
+  // Walk character by character, tracking strings and bracket depth
+  var inStr=false,esc=false,stack=[],lastSafeIdx=-1;
+  for(var i=0;i<s.length;i++){
+    var c=s[i];
+    if(esc){esc=false;continue;}
+    if(c==='\\'){esc=true;continue;}
+    if(c==='"'){inStr=!inStr;continue;}
+    if(inStr)continue;
+    if(c==='{')stack.push('}');
+    else if(c==='[')stack.push(']');
+    else if(c==='}'||c===']'){
+      if(stack.length&&stack[stack.length-1]===c)stack.pop();
+      if(!stack.length&&c==='}')lastSafeIdx=i;
+    }
+  }
+  // If we had a fully balanced close at some point, use it
+  if(lastSafeIdx>0){
+    try{return JSON.parse(s.slice(0,lastSafeIdx+1).replace(/,(\s*[}\]])/g,'$1'));}catch(e){}
+  }
+  // Response truncated — rewind to last complete item boundary, then close open structures
+  var trimmed=s;
+  if(inStr){
+    // We're mid-string — rewind to last `}` or `]` (end of a complete item)
+    var lastClose=Math.max(trimmed.lastIndexOf('}'),trimmed.lastIndexOf(']'));
+    if(lastClose>0)trimmed=trimmed.slice(0,lastClose+1);
+  }
+  // Strip trailing incomplete partial items (several patterns)
+  //  - ",field:val..." incomplete field
+  //  - ",{" or ",[" incomplete new object/array in an array
+  //  - trailing comma
+  for(var k=0;k<3;k++){
+    var before=trimmed;
+    trimmed=trimmed.replace(/,\s*"[^"]*"\s*:\s*[^,}\]]*$/,'');
+    trimmed=trimmed.replace(/,\s*\{[^}]*$/,'');
+    trimmed=trimmed.replace(/,\s*\[[^\]]*$/,'');
+    trimmed=trimmed.replace(/,\s*"[^"]*$/,'');
+    trimmed=trimmed.replace(/,\s*$/,'');
+    if(before===trimmed)break;
+  }
+  // Recount stack on trimmed version
+  inStr=false;esc=false;var stack2=[];
+  for(var j=0;j<trimmed.length;j++){
+    var ch=trimmed[j];
+    if(esc){esc=false;continue;}
+    if(ch==='\\'){esc=true;continue;}
+    if(ch==='"'){inStr=!inStr;continue;}
+    if(inStr)continue;
+    if(ch==='{')stack2.push('}');
+    else if(ch==='[')stack2.push(']');
+    else if(ch==='}'||ch===']'){if(stack2.length&&stack2[stack2.length-1]===ch)stack2.pop();}
+  }
+  // Close any still-open structures
+  while(stack2.length)trimmed+=stack2.pop();
+  trimmed=trimmed.replace(/,(\s*[}\]])/g,'$1');
+  return JSON.parse(trimmed);
+}
 function geoAttach(inpId){
   var inp=document.getElementById(inpId);if(!inp)return;
   geoBoxForInput(inpId);
@@ -1153,24 +1481,341 @@ function geoAttach(inpId){
   });
 }
 function initGeoSuggest(){geoAttach('fromInp');geoAttach('destInput');}
+
+/* ═══════════════════════════════════
+   UPLOAD & ANALYZE ITINERARY
+═══════════════════════════════════ */
+var _uplLibs={pdf:null,xlsx:null,mammoth:null};
+function loadScript(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=function(){res();};s.onerror=function(){rej(new Error('Failed to load '+src));};document.head.appendChild(s);});}
+async function ensureLib(name){
+  if(_uplLibs[name])return _uplLibs[name];
+  var urls={
+    pdf:'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+    pdfWorker:'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
+    xlsx:'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+    mammoth:'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js'
+  };
+  if(name==='pdf'){await loadScript(urls.pdf);window.pdfjsLib.GlobalWorkerOptions.workerSrc=urls.pdfWorker;_uplLibs.pdf=window.pdfjsLib;return _uplLibs.pdf;}
+  if(name==='xlsx'){await loadScript(urls.xlsx);_uplLibs.xlsx=window.XLSX;return _uplLibs.xlsx;}
+  if(name==='mammoth'){await loadScript(urls.mammoth);_uplLibs.mammoth=window.mammoth;return _uplLibs.mammoth;}
+}
+
+function uplSetStatus(msg,cls){
+  var el=document.getElementById('uplStatus');if(!el)return;
+  el.className='upl-status'+(cls?' '+cls:'');
+  if(cls==='loading')el.innerHTML='<span class="upl-spin"></span>'+msg;
+  else el.textContent=msg;
+}
+
+async function readFileAsText(file){
+  return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=function(){rej(r.error);};r.readAsText(file);});
+}
+async function readFileAsDataURL(file){
+  return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=function(){rej(r.error);};r.readAsDataURL(file);});
+}
+async function readFileAsArrayBuffer(file){
+  return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=function(){rej(r.error);};r.readAsArrayBuffer(file);});
+}
+
+async function extractTextFromFile(file){
+  var name=(file.name||'').toLowerCase();
+  var ext=name.split('.').pop();
+  // Images → return as base64 for vision
+  if(/^(png|jpg|jpeg|webp|gif)$/.test(ext)){
+    var du=await readFileAsDataURL(file);
+    var m=du.match(/^data:([^;]+);base64,(.+)$/);
+    return{kind:'image',mediaType:m?m[1]:file.type||'image/jpeg',data:m?m[2]:'',name:file.name};
+  }
+  // PDF
+  if(ext==='pdf'){
+    var lib=await ensureLib('pdf');
+    var buf=await readFileAsArrayBuffer(file);
+    var pdf=await lib.getDocument({data:buf}).promise;
+    var txt='';
+    var maxPages=Math.min(pdf.numPages,30);
+    for(var i=1;i<=maxPages;i++){
+      var pg=await pdf.getPage(i);
+      var tc=await pg.getTextContent();
+      txt+=tc.items.map(function(it){return it.str;}).join(' ')+'\n\n';
+    }
+    return{kind:'text',text:txt,name:file.name};
+  }
+  // Excel / CSV
+  if(/^(xlsx|xls|csv|tsv)$/.test(ext)){
+    var X=await ensureLib('xlsx');
+    var buf2=await readFileAsArrayBuffer(file);
+    var wb=X.read(buf2,{type:'array'});
+    var out='';
+    wb.SheetNames.forEach(function(sn){
+      out+='=== Sheet: '+sn+' ===\n';
+      out+=X.utils.sheet_to_csv(wb.Sheets[sn])+'\n\n';
+    });
+    return{kind:'text',text:out,name:file.name};
+  }
+  // DOCX
+  if(ext==='docx'){
+    var M=await ensureLib('mammoth');
+    var buf3=await readFileAsArrayBuffer(file);
+    var r=await M.extractRawText({arrayBuffer:buf3});
+    return{kind:'text',text:r.value||'',name:file.name};
+  }
+  // TXT, EML, MSG (treated as text), RTF (best effort)
+  if(/^(txt|eml|msg|rtf|md|html|htm)$/.test(ext)||file.type.indexOf('text')===0){
+    var t=await readFileAsText(file);
+    if(ext==='rtf')t=t.replace(/\\[a-z]+\d* ?/g,'').replace(/[{}]/g,'');
+    if(ext==='html'||ext==='htm')t=t.replace(/<[^>]+>/g,' ');
+    return{kind:'text',text:t,name:file.name};
+  }
+  // Fallback — try as text
+  try{var tx=await readFileAsText(file);return{kind:'text',text:tx,name:file.name};}
+  catch(e){throw new Error('Unsupported file type: '+ext);}
+}
+
+async function handleUploadFiles(fileList){
+  if(!fileList||!fileList.length)return;
+  if(!KEY){
+    var rawKey=(document.getElementById('akInput')||{}).value;
+    rawKey=(rawKey||'').trim();
+    if(rawKey&&rawKey.length>20&&!rawKey.includes('●'))KEY=rawKey;
+  }
+  if(!KEY){uplSetStatus('Please save your Claude API key first (top of page)','err');return;}
+  var btn=document.getElementById('uplAnalyzeBtn');if(btn)btn.disabled=true;
+  uplSetStatus('Reading '+fileList.length+' file(s)…','loading');
+  try{
+    var parts=[];var combinedText='';var imageParts=[];
+    for(var i=0;i<fileList.length;i++){
+      var f=fileList[i];
+      uplSetStatus('Reading: '+f.name,'loading');
+      try{
+        var r=await extractTextFromFile(f);
+        if(r.kind==='image')imageParts.push(r);
+        else combinedText+='\n\n=== FILE: '+r.name+' ===\n'+(r.text||'').slice(0,40000);
+      }catch(e){combinedText+='\n\n=== FILE: '+f.name+' === (could not extract: '+e.message+')';}
+    }
+    if(!combinedText.trim()&&!imageParts.length)throw new Error('No content could be extracted from the files.');
+    uplSetStatus('Asking Claude to analyse your itinerary…','loading');
+    await analyzeItineraryContent(combinedText,imageParts);
+  }catch(e){uplSetStatus('Error: '+e.message,'err');}
+  finally{if(btn)btn.disabled=false;}
+}
+
+async function analyzePastedText(){
+  var t=(document.getElementById('uplPaste')||{}).value||'';
+  t=t.trim();
+  if(!t){uplSetStatus('Paste some itinerary text first','err');return;}
+  if(!KEY){
+    var rawKey=((document.getElementById('akInput')||{}).value||'').trim();
+    if(rawKey&&rawKey.length>20&&!rawKey.includes('●'))KEY=rawKey;
+  }
+  if(!KEY){uplSetStatus('Please save your Claude API key first','err');return;}
+  var btn=document.getElementById('uplAnalyzeBtn');if(btn)btn.disabled=true;
+  uplSetStatus('Analyzing your text…','loading');
+  try{await analyzeItineraryContent(t,[]);}
+  catch(e){uplSetStatus('Error: '+e.message,'err');}
+  finally{if(btn)btn.disabled=false;}
+}
+
+async function analyzeItineraryContent(text,images){
+  var today=new Date().toISOString().slice(0,10);
+  var prompt='You are a travel itinerary parser. Analyze the following travel plan (from email, document, or pasted text) and extract structured trip information.\n\n'+
+    'INPUT:\n'+(text||'(no text — rely on attached images)')+'\n\n'+
+    'Return ONLY valid JSON, no markdown, no preamble. Schema:\n'+
+    '{\n'+
+    '  "from":"origin city or empty",\n'+
+    '  "destinations":["city1","city2"],\n'+
+    '  "departure_date":"YYYY-MM-DD or empty",\n'+
+    '  "return_date":"YYYY-MM-DD or empty",\n'+
+    '  "nights":number_or_null,\n'+
+    '  "profile":"solo|couple|family|business",\n'+
+    '  "travelers":number_or_null,\n'+
+    '  "adults":number_or_null,\n'+
+    '  "children_under_12":number_or_null,\n'+
+    '  "budget_usd":number_or_null,\n'+
+    '  "preferences":"short summary of stated preferences (hotel tier, interests, dietary, etc.)",\n'+
+    '  "existing_bookings":{"flights":["summary"],"hotels":["summary"]},\n'+
+    '  "existing_itinerary":[{"day":1,"title":"","activities":"one-line summary"}],\n'+
+    '  "notes":"anything else the user mentioned",\n'+
+    '  "confidence":"high|medium|low",\n'+
+    '  "summary":"1-sentence trip summary for human confirmation"\n'+
+    '}\n\n'+
+    'Rules:\n'+
+    '- If dates are relative ("next month", "in May"), convert using today='+today+'.\n'+
+    '- If origin is not mentioned, leave empty — do NOT guess.\n'+
+    '- Destinations = cities only (no countries as standalone entries unless country-wide trip).\n'+
+    '- profile: infer from context (romantic=couple, kids=family, conference=business, otherwise solo).\n'+
+    '- Only include existing_itinerary entries that were actually in the source.\n'+
+    '- Use null for unknowns, not guesses.';
+  var userContent=[];
+  images.forEach(function(img){userContent.push({type:'image',source:{type:'base64',media_type:img.mediaType,data:img.data}});});
+  userContent.push({type:'text',text:prompt});
+  var body={model:'claude-sonnet-4-6',max_tokens:3000,messages:[{role:'user',content:userContent}]};
+  var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify(body)});
+  if(!r.ok){var errJ=await r.json().catch(function(){return{};});throw new Error((errJ.error&&errJ.error.message)||'API '+r.status);}
+  var d=await r.json();
+  var raw=(d.content||[]).map(function(b){return b.text||'';}).join('').trim();
+  raw=raw.replace(/```json|```/gi,'').trim();
+  var si=raw.indexOf('{'),ei=raw.lastIndexOf('}');if(si>=0&&ei>si)raw=raw.slice(si,ei+1);
+  raw=raw.replace(/,(\s*[}\]])/g,'$1');
+  var parsed;try{parsed=JSON.parse(raw);}catch(e){throw new Error('Could not parse AI response. Try pasting as plain text.');}
+  renderUploadResult(parsed);
+  uplSetStatus('Extracted — review below and click "Generate Full Report"','ok');
+}
+
+var _LAST_UPLOAD=null;
+function renderUploadResult(p){
+  _LAST_UPLOAD=p;
+  var el=document.getElementById('uplResult');if(!el)return;
+  var row=function(k,v){return v?'<div class="upl-row"><div class="upl-k">'+k+'</div><div class="upl-v">'+escapeHTML(String(v))+'</div></div>':'';};
+  var destList=(p.destinations||[]).join(', ');
+  var bk=p.existing_bookings||{};
+  var bookingsHTML='';
+  if((bk.flights&&bk.flights.length)||(bk.hotels&&bk.hotels.length)){
+    bookingsHTML='<div class="upl-row"><div class="upl-k">Bookings</div><div class="upl-v">'+
+      ((bk.flights||[]).map(function(f){return'✈️ '+escapeHTML(f);}).join('<br>'))+
+      ((bk.flights&&bk.flights.length&&bk.hotels&&bk.hotels.length)?'<br>':'')+
+      ((bk.hotels||[]).map(function(h){return'🏨 '+escapeHTML(h);}).join('<br>'))+
+      '</div></div>';
+  }
+  var itinPreview='';
+  if(p.existing_itinerary&&p.existing_itinerary.length){
+    itinPreview='<div class="upl-row"><div class="upl-k">Found Itinerary</div><div class="upl-v">'+
+      p.existing_itinerary.slice(0,5).map(function(d){return'<b>Day '+d.day+':</b> '+escapeHTML(d.title||'')+(d.activities?' — <span style="color:var(--ts)">'+escapeHTML(d.activities)+'</span>':'');}).join('<br>')+
+      (p.existing_itinerary.length>5?'<br><i style="color:var(--tm)">…and '+(p.existing_itinerary.length-5)+' more days</i>':'')+
+      '</div></div>';
+  }
+  var conf=p.confidence||'medium';
+  var confCol={high:'#34d399',medium:'#fbbf24',low:'#f87171'}[conf]||'#94a3b8';
+  el.innerHTML=
+    '<div class="upl-card">'+
+      '<div class="upl-card-h">✅ Extracted from your itinerary <span style="margin-left:auto;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.04);color:'+confCol+';font-size:10px">confidence: '+conf+'</span></div>'+
+      (p.summary?'<div style="font-size:12px;color:var(--tp);margin-bottom:8px;line-height:1.5">'+escapeHTML(p.summary)+'</div>':'')+
+      row('From',p.from)+
+      row('Destinations',destList)+
+      row('Dates',p.departure_date?(p.departure_date+(p.return_date?' → '+p.return_date:'')):'')+
+      row('Nights',p.nights)+
+      row('Profile',p.profile)+
+      row('Travelers',p.travelers)+
+      row('Adults',p.adults)+
+      row('Children under 12',p.children_under_12)+
+      row('Budget',p.budget_usd?'$'+Number(p.budget_usd).toLocaleString():'')+
+      row('Preferences',p.preferences)+
+      bookingsHTML+
+      itinPreview+
+      row('Notes',p.notes)+
+      '<button class="upl-gencta" onclick="applyUploadAndRun()">🚀 Apply & Generate Full Report</button>'+
+      '<div style="text-align:center;margin-top:6px;font-size:10px;color:var(--tm)">This will fill the planner and launch all 13 agents</div>'+
+    '</div>';
+}
+
+function applyUploadAndRun(){
+  var p=_LAST_UPLOAD;if(!p)return;
+  // Origin
+  if(p.from){var fInp=document.getElementById('fromInp');if(fInp)fInp.value=p.from;FROM=p.from;}
+  // Destinations
+  DESTS_ARR.length=0;
+  (p.destinations||[]).forEach(function(d){if(d&&!DESTS_ARR.includes(d))DESTS_ARR.push(d);});
+  if(typeof renderChips==='function')renderChips();
+  // Dates
+  if(p.departure_date){var df=document.getElementById('dFrom');if(df)df.value=p.departure_date;}
+  if(p.return_date){var dt=document.getElementById('dTo');if(dt)dt.value=p.return_date;}
+  if(typeof calcDur==='function')try{calcDur();}catch(e){}
+  // Profile
+  var prof=(p.profile||'solo').toLowerCase();
+  if(!['solo','couple','family','business'].includes(prof))prof='solo';
+  PROFILE=prof;BDG_P=profileToBdg(prof);
+  var map={solo:0,couple:1,family:2,business:3};
+  var btns=document.querySelectorAll('.prbtn');if(btns&&btns.length>=4){btns.forEach(function(b){b.classList.remove('active');});btns[map[prof]].classList.add('active');}
+  // Passenger counts (adults + children)
+  if(typeof p.adults==='number'&&p.adults>0){ADULTS=Math.max(1,Math.min(12,p.adults));var ae=document.getElementById('paxAdults');if(ae)ae.textContent=ADULTS;}
+  if(typeof p.children_under_12==='number'&&p.children_under_12>=0){CHILDREN=Math.max(0,Math.min(10,p.children_under_12));var ce=document.getElementById('paxChildren');if(ce)ce.textContent=CHILDREN;}
+  // Stash preferences so agent prompts can pick them up (optional enhancement)
+  window._UPLOAD_PREFS=p.preferences||'';
+  // Close the upload panel and launch
+  var w=document.getElementById('uplWrap');if(w)w.removeAttribute('open');
+  uplSetStatus('','');
+  try{runAll();}catch(e){console.warn(e);}
+}
+/* end upload engine */
 function remDest(i){DESTS_ARR.splice(i,1);renderChips();}
 function renderChips(){document.getElementById('destChips').innerHTML=DESTS_ARR.map((d,i)=>`<span class="dest-chip">${d}<button class="chip-rm" onclick="remDest(${i})">×</button></span>`).join('');}
 function calcDur(){
-  const f=document.getElementById('dFrom').value,t=document.getElementById('dTo').value;
-  if(f&&t){const n=Math.round((new Date(t)-new Date(f))/864e5);const el=document.getElementById('tb-dur');el.textContent=n>0?n+' days':'';el.style.display=n>0?'block':'none';}
+  var dur=0;
+  if(TRIP_TYPE==='one'){
+    var nInp=document.getElementById('dNights');
+    dur=nInp?parseInt(nInp.value)||0:0;
+  }else{
+    const f=document.getElementById('dFrom').value,t=document.getElementById('dTo').value;
+    if(f&&t)dur=Math.round((new Date(t)-new Date(f))/864e5);
+  }
+  var el=document.getElementById('tb-dur');
+  if(el){el.textContent=dur>0?dur+' days'+(TRIP_TYPE==='one'?' · one-way':''):'';el.style.display=dur>0?'block':'none';}
 }
+function setTripType(kind){
+  TRIP_TYPE=(kind==='one')?'one':'round';
+  var ttOne=document.getElementById('ttOne'),ttRound=document.getElementById('ttRound');
+  if(ttOne)ttOne.classList.toggle('active',TRIP_TYPE==='one');
+  if(ttRound)ttRound.classList.toggle('active',TRIP_TYPE==='round');
+  var rf=document.getElementById('returnField'),nf=document.getElementById('nightsField');
+  if(rf)rf.style.display=(TRIP_TYPE==='one')?'none':'';
+  if(nf)nf.style.display=(TRIP_TYPE==='one')?'':'none';
+  // If switching to one-way, auto-copy nights from any existing date range
+  if(TRIP_TYPE==='one'){
+    var f=(document.getElementById('dFrom')||{}).value,t=(document.getElementById('dTo')||{}).value;
+    if(f&&t){
+      var n=Math.round((new Date(t)-new Date(f))/864e5);
+      if(n>0){var ni=document.getElementById('dNights');if(ni&&(!ni.value||ni.value==='7'))ni.value=n;}
+    }
+  }
+  calcDur();
+}
+// Universal trip-length helper — works for both one-way (nights input) and round-trip (date diff)
+function tripNights(){
+  if(TRIP_TYPE==='one'){
+    var n=parseInt((document.getElementById('dNights')||{}).value)||0;
+    return n>0?n:7;
+  }
+  var f=(document.getElementById('dFrom')||{}).value,t=(document.getElementById('dTo')||{}).value;
+  if(f&&t){var n=Math.round((new Date(t)-new Date(f))/864e5);return n>0?n:7;}
+  return 7;
+}
+function tripTypeLabel(){return TRIP_TYPE==='one'?'one-way':'round-trip';}
+function changePax(kind,delta){
+  if(kind==='adults'){ADULTS=Math.max(1,Math.min(12,ADULTS+delta));var a=document.getElementById('paxAdults');if(a)a.textContent=ADULTS;}
+  else if(kind==='children'){CHILDREN=Math.max(0,Math.min(10,CHILDREN+delta));var c=document.getElementById('paxChildren');if(c)c.textContent=CHILDREN;}
+  // Auto-select the closest profile — but don't override an explicit Business choice
+  if(PROFILE!=='business'){
+    var inferred='solo';
+    if(CHILDREN>0)inferred='family';
+    else if(ADULTS===1)inferred='solo';
+    else if(ADULTS===2)inferred='couple';
+    else inferred='family';
+    if(inferred!==PROFILE){
+      PROFILE=inferred;
+      BDG_P=profileToBdg(inferred);
+      var map={solo:0,couple:1,family:2,business:3};
+      var btns=document.querySelectorAll('.prbtn');
+      if(btns&&btns.length>=4){btns.forEach(function(b){b.classList.remove('active');});btns[map[inferred]].classList.add('active');}
+      try{if(typeof drawBudget==='function'&&_BDG)drawBudget();}catch(e){}
+    }
+  }
+  // Redraw budget if visible
+  try{if(_BDG&&typeof drawBudget==='function')drawBudget();}catch(e){}
+}
+// Total passengers — convenience for prompts & math
+function totalPax(){return ADULTS+CHILDREN;}
+function paxSummary(){return ADULTS+' adult'+(ADULTS===1?'':'s')+(CHILDREN>0?' + '+CHILDREN+' child'+(CHILDREN===1?'':'ren')+' (<12)':'');}
 function setProfile(p,el){PROFILE=p;document.querySelectorAll('.prbtn').forEach(b=>b.classList.remove('active'));el.classList.add('active');BDG_P=profileToBdg(p);try{if(typeof drawBudget==='function'&&_BDG)drawBudget();}catch(e){}}
 function profileToBdg(p){return{solo:'solo',couple:'couple',family:'family4',business:'solo'}[p]||'solo';}
-function pCtx(){return{solo:'Focus on solo-friendly, independent traveler tips, safety for solo, social hostels.',couple:'Focus on romantic experiences, couple activities, intimate dining, mid-range luxury.',family:'Focus on child-friendly attractions, family rooms, safety, practical family tips, baby facilities.',business:'Focus on business hotels, fast connectivity, executive dining, airport transport, efficient planning.'}[PROFILE]||'';}
+function pCtx(){var base={solo:'Focus on solo-friendly, independent traveler tips, safety for solo, social hostels.',couple:'Focus on romantic experiences, couple activities, intimate dining, mid-range luxury.',family:'Focus on child-friendly attractions, family rooms, safety, practical family tips, baby facilities.',business:'Focus on business hotels, fast connectivity, executive dining, airport transport, efficient planning.'}[PROFILE]||'';base+=' Group: '+paxSummary()+'.';if(CHILDREN>0)base+=' IMPORTANT: Travelling WITH '+CHILDREN+' child'+(CHILDREN===1?'':'ren')+' under age 12 — recommend family rooms, child-friendly restaurants, kid-appropriate activities, avoid late-night/adult-only venues, mention child pricing where relevant.';var up=window._UPLOAD_PREFS;if(up)base+=' User-supplied preferences (from uploaded itinerary): '+up;return base;}
 
 /* ═══════════════════════════════════
    AGENT DEFINITIONS
 ═══════════════════════════════════ */
 const AGENTS=[
   {id:'flights',name:'Flight Finder',desc:'All Airlines · All Stops · All Fares',icon:'✈️',col:'rgba(59,130,246,.12)',bc:'rgba(59,130,246,.25)',claude:true,
-   p:d=>`You are a COMPREHENSIVE flight market aggregator — behave like Skyscanner + Google Flights + Kayak combined. Route: ${FROM||'major hub'} → ${d}. Profile: ${PROFILE}. ${pCtx()}
+   p:d=>`You are a COMPREHENSIVE flight market aggregator — behave like Skyscanner + Google Flights + Kayak combined. Route: ${FROM||'major hub'} → ${d}. Trip type: ${tripTypeLabel().toUpperCase()}. Passengers: ${paxSummary()}. Profile: ${PROFILE}. ${pCtx()}
 
-CRITICAL: Do NOT summarize. ENUMERATE every realistic option. Travelers need the full market view, not 2-3 picks. Use realistic 2025-2026 fare ranges in USD per person round-trip.
+CRITICAL: Do NOT summarize. ENUMERATE every realistic option. Use realistic 2025-2026 fare ranges in USD per ADULT for a ${tripTypeLabel()} ticket. ${TRIP_TYPE==='one'?'Quote ONE-WAY fares only — do not multiply by 2.':'Quote ROUND-TRIP fares.'} ${CHILDREN>0?`At the end of the response, add a section **👶 Child Fares** covering typical child discount for ${CHILDREN} child${CHILDREN===1?'':'ren'} under 12 (usually 75% of adult fare on most airlines, free infants under 2 on lap), baggage rules for kids, and bassinet/child-meal booking tips.`:''}
 
 **✈️ NONSTOP FLIGHTS**
 List EVERY airline operating nonstop ${FROM||'origin'} → ${d}. If none exist, state so and skip. Format as a table:
@@ -1324,20 +1969,80 @@ Use **bold** headers and tables. Under 600 words.`},
   {id:'sim',name:'SIM & Connectivity',desc:'eSIM - Local SIM - Data',icon:'📱',col:'rgba(139,92,246,.1)',bc:'rgba(139,92,246,.22)',claude:true,
    p:d=>`Mobile connectivity guide for ${d}. ${FROM?`Traveler from ${FROM}.`:''} **eSIM Before Travel** (Airalo/Nomad/Holafly/Ubigi - cost 7/14/30 days). **Airport SIM on Arrival** (carrier kiosk, cost). **Local SIM in City** (best carrier, tourist plan costs, ID needed). **Coverage** (4G/5G). **Other Options** (pocket WiFi, hotel WiFi). **Best Recommendation** for ${PROFILE}. USD costs. **Bold** headers. Under 360 words.`},
   {id:'links',name:'Book & Contact',desc:'Airlines - Hotels - Agencies - Visa',icon:'🔗',col:'rgba(59,130,246,.1)',bc:'rgba(59,130,246,.25)',claude:true,
-   p:d=>`Return ONLY valid JSON, no markdown. Trip: ${FROM||'UAE'} to ${d}. Profile: ${PROFILE}.
-{"airlines":[{"name":"str","category":"Nonstop|1-Stop|Budget|Premium","hub":"str","route":"str","fare_from_usd":"$X","booking":"url","phone":"str","notes":"str"}],"hotels":[{"name":"str","tier":"Hostel|Budget|Mid|Luxury","area":"str","booking":"url","direct":"url","price_usd_night":"$X","notes":"str"}],"travel_agencies":[{"name":"str","city":"str","speciality":"str","website":"url","phone":"str","notes":"str"}],"visa_contacts":[{"name":"str","city":"str","address":"str","phone":"str","email":"str","website":"url","hours":"str","processing_days":"str"}],"aggregators":[{"name":"str","website":"url","best_for":"str"}],"booking_tips":["tip1","tip2","tip3","tip4","tip5"]}
+   p:d=>`Return ONLY valid COMPLETE JSON, no markdown. Keep all string values CONCISE (under 100 chars each) so JSON stays within budget. Trip: ${FROM||'UAE'} to ${d}. Profile: ${PROFILE}.
 
-REQUIRED volume:
-- **12 airlines minimum** — mix of categories: 3-4 Nonstop carriers, 4-5 1-Stop carriers via hubs, 2-3 Budget/LCC, 2-3 Premium. Include real booking URLs (airline's own site).
-- **10 hotels** — 2 Hostel, 3 Budget, 3 Mid, 2 Luxury — with real Booking.com URL and direct hotel URL.
-- **4 travel agencies** based in ${FROM||'UAE'}.
-- **2 visa contacts** (embassy/VFS).
-- **5 aggregators** — Skyscanner, Google Flights, Kayak, Booking.com, Agoda (or equivalents relevant to this route) with the "best_for" note.
-- **5 booking tips** specific to this route.
+{"airlines":[{"name":"str","category":"Nonstop|1-Stop|Budget|Premium","hub":"str","route":"short","fare_from_usd":"$X","booking":"url","phone":"str","notes":"short"}],"hotels":[{"name":"str","tier":"Hostel|Budget|Mid|Luxury","area":"str","booking":"url","direct":"url","price_usd_night":"$X","notes":"short"}],"travel_agencies":[{"name":"str","city":"str","speciality":"short","website":"url","phone":"str","notes":"short"}],"visa_contacts":[{"name":"str","city":"str","address":"short","phone":"str","email":"str","website":"url","hours":"short","processing_days":"str"}],"aggregators":[{"name":"str","website":"url","best_for":"short"}],"booking_tips":["short tip","short tip","short tip","short tip","short tip"]}
 
-Real names and real URLs only. No fabricated data.`},
+Required counts (EXACT):
+- airlines: 10 (3 Nonstop, 4 1-Stop, 2 Budget, 1 Premium)
+- hotels: 8 (2 Hostel, 2 Budget, 2 Mid, 2 Luxury)
+- travel_agencies: 3 in ${FROM||'UAE'}
+- visa_contacts: 2
+- aggregators: 5
+- booking_tips: 5
+
+Real names, real URLs. Close all brackets. Valid JSON only.`},
   {id:'sustain',name:'Eco & Sustainability',desc:'Carbon · Green Score · Ethics',icon:'🌱',col:'rgba(16,185,129,.1)',bc:'rgba(16,185,129,.22)',claude:true,
    p:d=>`Expert eco-travel agent for ${d}. ${FROM?`Departure: ${FROM}.`:''} Cover: estimated carbon footprint from ${FROM||'Dubai & London'} (kg CO₂ economy vs business class), carbon offset options, eco-certified hotels, green activities, environmental concerns, sustainable local transport, ethical tourism tips, wildlife & cultural protection, community support tips. Overall eco-friendliness rating /10. **Bold** headers. Under 320 words.`},
+  {id:'deals',name:'Deals & Offers',desc:'Fares · Cards · Miles · Perks',icon:'🎁',col:'rgba(236,72,153,.1)',bc:'rgba(236,72,153,.25)',claude:true,
+   p:d=>`You are a deals and loyalty expert for travel. Route: ${FROM||'major hub'} → ${d}. Profile: ${PROFILE}. ${pCtx()}
+
+Return ONLY valid, COMPLETE JSON. No markdown, no preamble, no trailing commentary. Keep ALL string values CONCISE (under 120 chars each) so the JSON stays within budget.
+
+{
+"airline_offers":[{"airline":"str","offer":"concise offer description","booking_window":"Book by date","travel_window":"Travel dates","route":"IATA → IATA","code":"","link":"https://..."}],
+"credit_card_offers":[{"card":"card name","issuer":"bank","airline_partner":"airline","welcome_bonus":"X miles/points","annual_fee":"$X","key_perks":["perk","perk","perk"],"best_for":"short phrase","apply_link":"https://..."}],
+"loyalty_programs":[{"program":"name","airline":"airline","tier":"tier names","earn_rate":"X miles per $","redemption_sweet_spot":"short description","partner_alliances":"Oneworld/SkyTeam/Star","link":"https://..."}],
+"lounge_access":[{"lounge":"name","location":"airport code/terminal","access_via":"Priority Pass/Amex/status","notes":"short"}],
+"baggage_perks":[{"airline":"str","perk":"short perk","how_to_get":"short"}],
+"flash_sales":[{"source":"str","description":"short","url":"https://..."}],
+"hotel_loyalty":[{"program":"str","destination_status":"short","sweet_spot":"short","link":"https://..."}],
+"pro_tips":["short tip","short tip","short tip","short tip"]
+}
+
+Required counts (HIT EXACTLY, not more):
+- airline_offers: 5 items
+- credit_card_offers: 4 items (mix of ${FROM||'regional'} cobrands and global Amex/Visa Signature)
+- loyalty_programs: 4 items
+- lounge_access: 3 items
+- baggage_perks: 3 items
+- flash_sales: 2 items
+- hotel_loyalty: 3 items
+- pro_tips: 4 items
+
+Use realistic 2025-2026 offers. Real card names. key_perks array = EXACTLY 3 bullets per card, each under 60 chars. No fabricated promo codes — leave code="" if none. Close all brackets. Return valid JSON only.`},
+  {id:'emergency',name:'Safety & Emergency',desc:'Hospitals · Pharmacies · Embassy',icon:'🚨',col:'rgba(244,63,94,.08)',bc:'rgba(244,63,94,.25)',claude:true,
+   p:d=>`You are a travel safety and emergency expert. Destination: ${d}. Traveler origin: ${FROM||'unknown'}. Passengers: ${paxSummary()}.${CHILDREN>0?' Travelling with children under 12 — prioritize pediatric-capable hospitals.':''}
+
+Return ONLY valid COMPLETE JSON, no markdown, no preamble. Keep ALL string values CONCISE (under 120 chars each) so the JSON stays within budget.
+
+{
+"emergency_numbers":{"ambulance":"str","police":"str","fire":"str","tourist_police":"str or null","general_emergency":"str (e.g., 112, 911)"},
+"hospitals":[{"name":"str","area":"neighborhood","phone":"+country number","specialty":"e.g., International · Emergency 24/7","english_speaking":true,"insurance_friendly":true,"pediatric":true,"notes":"short"}],
+"pharmacies_24h":[{"name":"str","area":"str","phone":"str","hours":"24/7 or hours","notes":"chain, english staff, etc."}],
+"embassy":{"country":"${FROM||'your home country'}","name":"Embassy/Consulate name","address":"short","phone":"+country number","emergency_hotline":"24/7 emergency number","email":"str","website":"https://...","hours":"mon-fri X-X","notes":"short"},
+"other_origin_embassies":[{"country":"country name","name":"str","phone":"str","notes":"short"}],
+"travel_clinics":[{"name":"str","area":"str","services":"travel shots, malaria meds, etc.","phone":"str"}],
+"vaccinations":{"required":["list"],"recommended":["list"],"notes":"short"},
+"water_safety":"one-line answer (drinkable/bottled only/boil)",
+"food_safety":"one-line key advice",
+"common_scams":["short scam 1","short scam 2","short scam 3","short scam 4"],
+"safety_tips":["short tip 1","short tip 2","short tip 3","short tip 4"],
+"lost_passport_steps":["step 1","step 2","step 3"],
+"medical_insurance_advice":"one-line advice about coverage in ${d}",
+"general_safety_rating":"1-10 with one-line explanation"
+}
+
+Required counts (EXACT):
+- hospitals: 4 (at least 2 with 24/7 emergency; 1 pediatric if destination has well-known children's hospital; mix international-standard and government)
+- pharmacies_24h: 3 (real chains if applicable — Boots, CVS, Duane Reade, Watsons, Mannings, Guardian, etc.)
+- other_origin_embassies: 2-3 (commonly relevant nationalities like US/UK/AU for ${d})
+- travel_clinics: 2
+- common_scams: 4
+- safety_tips: 4
+- lost_passport_steps: 3
+
+Real names and phone numbers. Use official embassy data for ${FROM||'common origin countries'}. Close all brackets. Valid JSON only.`},
 ];
 
 /* ═══════════════════════════════════
@@ -1490,7 +2195,7 @@ async function claudeAgent(a){
   upCard(a.id,{status:'running',progress:15});
   try{
     const tick=setInterval(()=>{const cur=(AS[a.id]||{}).progress||15;if(cur<72)upCard(a.id,{progress:cur+Math.random()*9});},800);
-    const MT={flights:3500,hotels:2800,food:2000,tourist:2200,transport:1800,reviews:1500,visa:1600,agency:1800,sim:1500,links:4000,sustain:1400};
+    const MT={flights:3500,hotels:2800,food:2000,tourist:2200,transport:1800,reviews:1500,visa:1600,agency:1800,sim:1500,links:5500,sustain:1400,deals:7000,emergency:5500};
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:(MT[a.id]||1500),messages:[{role:'user',content:a.p(DEST)}]})});
     clearInterval(tick);
     if(!r.ok){
@@ -1503,7 +2208,7 @@ async function claudeAgent(a){
     }
     const d=await r.json();
     const raw=(d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
-    var _sc=(a.id==='links')?raw:md2html(raw);upCard(a.id,{status:'done',content:_sc,progress:100});
+    var _sc=(a.id==='links'||a.id==='deals'||a.id==='emergency')?raw:md2html(raw);upCard(a.id,{status:'done',content:_sc,progress:100});
   }catch(e){
     const isCors=e instanceof TypeError&&(e.message.includes('fetch')||e.message.includes('Failed'));
     upCard(a.id,{status:'error',content:isCors?'🚫 CORS error — must serve via <strong>localhost</strong>, not file://':'⚠ '+e.message,progress:0});
@@ -1649,10 +2354,11 @@ async function buildComparison(){
 ═══════════════════════════════════ */
 async function buildItinerary(){
   const f=document.getElementById('dFrom').value,t=document.getElementById('dTo').value;
-  let nights=5,sd=null;
-  if(f&&t){nights=Math.max(1,Math.round((new Date(t)-new Date(f))/864e5));sd=new Date(f);}
+  let nights=tripNights(),sd=null;
+  if(f)sd=new Date(f);
   const ctx=AGENTS.filter(a=>AS[a.id]?.status==='done').map(a=>`[${a.name}]:${(AS[a.id]?.content||'').replace(/<[^>]+>/g,'').slice(0,280)}`).join('\n');
-  const prompt=`Build a DETAILED ${nights}-day itinerary for a ${PROFILE} traveler from ${FROM} to ${DEST}. Use this research:
+  const lastDayNote=TRIP_TYPE==='one'?'One-way trip — no return flight. Last day can be full-day exploration, not departure-focused. Mention the onward journey if relevant.':'Day 1 = arrival-friendly (lighter), last day = departure-aware (allow time for airport transfer).';
+  const prompt=`Build a DETAILED ${nights}-day itinerary for a ${PROFILE} traveler from ${FROM} to ${DEST}. Trip type: ${tripTypeLabel()}. Use this research:
 ${ctx}
 
 CRITICAL: Output in EXACTLY this pipe-delimited format. No markdown, no extra text. One item per line.
@@ -1676,7 +2382,7 @@ Rules:
 - Morning must start with a specific time window; same for afternoon and evening.
 - Keep each line under 220 characters.
 - Build a logical flow — don't repeat the same neighborhood twice in a row unless it makes sense.
-- Day 1 = arrival-friendly (lighter), last day = departure-aware.
+- ${lastDayNote}
 - Mix iconic sights with hidden gems across the trip.`;
   try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:4000,messages:[{role:'user',content:prompt}]})});
@@ -1714,7 +2420,7 @@ function drawItinerary(raw,nights,sd){
   }).join('');
   document.getElementById('itinContent').innerHTML=`
     <div class="itin-hdr">
-      <div><div class="itin-title">${nights}-Day Itinerary · ${DEST}</div><div class="itin-meta">${PROFILE.charAt(0).toUpperCase()+PROFILE.slice(1)} traveler · ${FROM} → ${DEST} · AI-generated</div></div>
+      <div><div class="itin-title">${nights}-Day Itinerary · ${DEST}</div><div class="itin-meta">${paxSummary()} · ${FROM} → ${DEST} · ${PROFILE} · AI-generated</div></div>
       <div class="share-btns">
         <button class="shr sh1" onclick="exportFullReportPDF()" style="background:linear-gradient(135deg,rgba(29,78,216,.25),rgba(8,145,178,.25));border:1px solid rgba(59,130,246,.5);color:#93c5fd">📄 Full Report PDF</button>
         <button class="shr sh2" onclick="window.open('https://api.whatsapp.com/send?text=${enc}','_blank')">WhatsApp</button>
@@ -1732,13 +2438,13 @@ function dlTxt(enc){const a=document.createElement('a');a.href='data:text/plain;
    BUDGET PLANNER
 ═══════════════════════════════════ */
 async function buildBudget(){
-  const f=document.getElementById('dFrom').value,t=document.getElementById('dTo').value;
-  let nights=7;
-  if(f&&t)nights=Math.max(1,Math.round((new Date(t)-new Date(f))/864e5));
-  const prompt=`Travel budget expert. Trip: ${FROM} → ${DEST}. ${nights} nights. Provide realistic 2025 USD estimates.
+  let nights=tripNights();
+  const tripT=tripTypeLabel();
+  const flightNote=TRIP_TYPE==='one'?'Note: Trip is ONE-WAY — flight costs should be roughly half of a round-trip. Use one-way fare estimates.':'Round-trip fares expected.';
+  const prompt=`Travel budget expert. Trip: ${FROM} → ${DEST}. ${nights} nights. Trip type: ${tripT}. Provide realistic 2025 USD estimates. ${flightNote}
 Return ONLY valid JSON (no extra text):
-{"nights":${nights},"from":"${FROM}","to":"${DEST}",
-"flights_roundtrip":{"economy":{"solo":650,"couple":1300,"family4":2200},"business":{"solo":2800,"couple":5600,"family4":9000}},
+{"nights":${nights},"from":"${FROM}","to":"${DEST}","trip_type":"${tripT}",
+"flights_roundtrip":{"economy":{"solo":${TRIP_TYPE==='one'?325:650},"couple":${TRIP_TYPE==='one'?650:1300},"family4":${TRIP_TYPE==='one'?1100:2200}},"business":{"solo":${TRIP_TYPE==='one'?1400:2800},"couple":${TRIP_TYPE==='one'?2800:5600},"family4":${TRIP_TYPE==='one'?4500:9000}}},
 "accommodation_per_night":{"youth_hostel":{"solo":18,"couple":34,"family4":60,"label":"Youth Hostel / Dorm","note":"shared dorm or budget private"},"budget_hotel":{"solo":50,"couple":75,"family4":115,"label":"Budget Hotel 1-2★","note":"clean private room, basic amenities"},"mid_hotel":{"solo":120,"couple":160,"family4":250,"label":"Mid-Range 3★ Hotel","note":"comfortable, good location"},"luxury_hotel":{"solo":320,"couple":430,"family4":660,"label":"Luxury 4-5★ Hotel","note":"premium amenities, prime location"}},
 "food_per_day":{"budget":{"solo":20,"couple":38,"family4":70},"mid":{"solo":55,"couple":100,"family4":190},"luxury":{"solo":130,"couple":250,"family4":470}},
 "transport_per_day":{"budget":{"solo":5,"couple":10,"family4":18},"mid":{"solo":15,"couple":28,"family4":52},"luxury":{"solo":45,"couple":80,"family4":130}},
@@ -1749,12 +2455,13 @@ Return ONLY valid JSON (no extra text):
 "insurance_per_person":45,
 "tips":["tip 1","tip 2","tip 3","tip 4"],
 "warning":"one honest hidden-cost caveat"}
-Replace all REAL ATTRACTION placeholders with actual ${DEST} attractions. Make all numbers accurate for ${DEST} in 2025.`;
+Replace all REAL ATTRACTION placeholders with actual ${DEST} attractions. Make all numbers accurate for ${DEST} in 2025. For flights_roundtrip key, the VALUES should reflect a ${tripT} ticket even though the key is named "flights_roundtrip".`;
   try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1800,messages:[{role:'user',content:prompt}]})});
     const d=await r.json();
     const raw=(d.content||[]).map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
     _BDG=JSON.parse(raw);
+    _BDG.trip_type=tripT; // ensure set regardless of whether model included it
     drawBudget();
   }catch(e){document.getElementById('budgetContent').innerHTML=`<div class="empty"><div class="empty-ico">⚠️</div><div class="empty-title">Budget error</div><div class="empty-sub">${e.message}</div></div>`;}
 }
@@ -1764,32 +2471,64 @@ function drawBudget(){
   const expT=tk==='youth_hostel'||tk==='budget_hotel'?'budget':tk==='mid_hotel'?'mid':'luxury';
   const accom=b.accommodation_per_night[tk];
   const nights=b.nights||7;
-  const accomAmt=(accom[p]||0)*nights;
   const flightKey=tk==='luxury_hotel'?'business':'economy';
-  const flight=b.flights_roundtrip[flightKey][p]||0;
-  const food=(b.food_per_day[expT]||b.food_per_day.mid)[p]||0;
-  const trans=(b.transport_per_day[expT]||b.transport_per_day.mid)[p]||0;
-  const ent=(b.entertainment_per_day[expT]||b.entertainment_per_day.mid)[p]||0;
-  const entry=(b.entry_fees||[]).reduce((s,e)=>s+(e[p]||0),0);
-  const misc=(b.misc_per_day[p]||0)*nights;
-  const visa=b.visa?.[p]||0;
-  const persons={solo:1,couple:2,family4:4}[p]||1;
+
+  // ─── Pax-aware cost helpers ───────────────────────────────────────────────
+  // Derive per-adult cost from the AI's tiered data (solo=1 adult, couple=2 adults)
+  // Children are approximated at 75% of adult for flights/food/entry, 100% for accom
+  function perAdultFrom(tier){
+    if(!tier)return 0;
+    var s=tier.solo||0,c=tier.couple||s*2;
+    // Average both datapoints to smooth AI inconsistency
+    return (s+c/2)/2;
+  }
+  function paxScaled(tier,childMult){
+    if(childMult===undefined)childMult=0.75;
+    var pa=perAdultFrom(tier);
+    return Math.round(ADULTS*pa+CHILDREN*pa*childMult);
+  }
+  // Accommodation scales by ROOMS needed, not per person. Base = couple-rate for 1 room
+  function accomPerNight(tier){
+    if(!tier)return 0;
+    var pax=ADULTS+CHILDREN;
+    if(pax<=2)return tier.couple||tier.solo||0;
+    if(pax<=4)return tier.family4||(tier.couple||0)*1.5;
+    // 5+ pax: family room + extra room
+    return (tier.family4||0)+(tier.couple||0);
+  }
+
+  const accomNight=accomPerNight(accom);
+  const accomAmt=Math.round(accomNight*nights);
+  const flight=paxScaled(b.flights_roundtrip[flightKey]);
+  const foodDaily=paxScaled(b.food_per_day[expT]||b.food_per_day.mid);
+  const transDaily=paxScaled(b.transport_per_day[expT]||b.transport_per_day.mid);
+  const entDaily=paxScaled(b.entertainment_per_day[expT]||b.entertainment_per_day.mid);
+  // Entry fees: children often ~60% of adult
+  const entry=(b.entry_fees||[]).reduce((sum,e)=>sum+paxScaled(e,0.6),0);
+  const miscDaily=paxScaled(b.misc_per_day,1); // misc is roughly equal per pax
+  const visa=paxScaled(b.visa||{},1); // visa is full price for most children too
+  const persons=ADULTS+CHILDREN;
   const ins=(b.insurance_per_person||45)*persons;
-  const grand=flight+accomAmt+food*nights+trans*nights+ent*nights+entry+misc+visa+ins;
+  const foodTotal=foodDaily*nights,transTotal=transDaily*nights,entTotal=entDaily*nights,miscTotal=miscDaily*nights;
+  const grand=flight+accomAmt+foodTotal+transTotal+entTotal+entry+miscTotal+visa+ins;
   const perDay=Math.round((grand-flight-visa-ins)/nights);
 
+  const paxLbl=paxSummary();
   const pLabel={solo:'👤 Solo Traveler',couple:'💑 Couple (2 pax)',family4:'👨‍👩‍👧‍👦 Family of 4'};
   const tLabel={youth_hostel:'🛏 Hostel',budget_hotel:'🏠 Budget',mid_hotel:'🏨 Mid-Range',luxury_hotel:'🌟 Luxury'};
 
+  const flLabel=(b.trip_type==='one-way'||TRIP_TYPE==='one')?'One-way Flights':'Round-trip Flights';
+  const flSub=`${flightKey==='business'?'Business':'Economy'} · ${ADULTS} adult${ADULTS===1?'':'s'}`+(CHILDREN>0?` + ${CHILDREN} child${CHILDREN===1?'':'ren'} (≈75% fare)`:'');
+  const accomSub=`${accom.note} · $${accomNight}/night × ${nights} nights · ${ADULTS+CHILDREN<=2?'1 room':ADULTS+CHILDREN<=4?'family room':'2 rooms'}`;
   const cats=[
-    {ico:'✈️',col:'#3b82f6',bg:'rgba(59,130,246,.12)',label:'Round-trip Flights',sub:`${flightKey==='business'?'Business':'Economy'} class · per ${p==='family4'?'family (2 adults)':p==='couple'?'couple':'person'}`,amt:flight},
-    {ico:'🏨',col:'#10b981',bg:'rgba(16,185,129,.1)',label:accom.label,sub:`${accom.note} · $${accom[p]}/night × ${nights} nights`,amt:accomAmt},
-    {ico:'🍜',col:'#f59e0b',bg:'rgba(245,158,11,.1)',label:'Food & Dining',sub:`$${food}/day × ${nights} days`,amt:food*nights},
-    {ico:'🚇',col:'#8b5cf6',bg:'rgba(139,92,246,.1)',label:'Local Transport',sub:`$${trans}/day × ${nights} days`,amt:trans*nights},
-    {ico:'🎭',col:'#ec4899',bg:'rgba(236,72,153,.1)',label:'Entertainment & Activities',sub:`$${ent}/day × ${nights} days`,amt:ent*nights},
-    {ico:'🎟',col:'#f43f5e',bg:'rgba(244,63,94,.1)',label:'Attraction Entry Fees',sub:`${(b.entry_fees||[]).length} major sites`,amt:entry},
-    {ico:'🛍',col:'#06b6d4',bg:'rgba(6,182,212,.1)',label:'Misc (Tips, SIM, Souvenirs)',sub:`$${b.misc_per_day[p]||0}/day × ${nights} days`,amt:misc},
-    {ico:'📋',col:'#94a3b8',bg:'rgba(148,163,184,.1)',label:'Visa & Entry Fees',sub:'Estimated total',amt:visa},
+    {ico:'✈️',col:'#3b82f6',bg:'rgba(59,130,246,.12)',label:flLabel,sub:flSub,amt:flight},
+    {ico:'🏨',col:'#10b981',bg:'rgba(16,185,129,.1)',label:accom.label,sub:accomSub,amt:accomAmt},
+    {ico:'🍜',col:'#f59e0b',bg:'rgba(245,158,11,.1)',label:'Food & Dining',sub:`$${foodDaily}/day × ${nights} days (${paxLbl})`,amt:foodTotal},
+    {ico:'🚇',col:'#8b5cf6',bg:'rgba(139,92,246,.1)',label:'Local Transport',sub:`$${transDaily}/day × ${nights} days`,amt:transTotal},
+    {ico:'🎭',col:'#ec4899',bg:'rgba(236,72,153,.1)',label:'Entertainment & Activities',sub:`$${entDaily}/day × ${nights} days`,amt:entTotal},
+    {ico:'🎟',col:'#f43f5e',bg:'rgba(244,63,94,.1)',label:'Attraction Entry Fees',sub:`${(b.entry_fees||[]).length} sites · child ≈60% of adult`,amt:entry},
+    {ico:'🛍',col:'#06b6d4',bg:'rgba(6,182,212,.1)',label:'Misc (Tips, SIM, Souvenirs)',sub:`$${miscDaily}/day × ${nights} days`,amt:miscTotal},
+    {ico:'📋',col:'#94a3b8',bg:'rgba(148,163,184,.1)',label:'Visa & Entry Fees',sub:`${persons} passport${persons===1?'':'s'}`,amt:visa},
     {ico:'🛡',col:'#84cc16',bg:'rgba(132,204,22,.1)',label:'Travel Insurance',sub:`$${b.insurance_per_person||45}/person × ${persons}`,amt:ins},
   ].filter(c=>c.amt>0);
   const maxAmt=Math.max(...cats.map(c=>c.amt),1);
@@ -1805,13 +2544,13 @@ function drawBudget(){
 
   document.getElementById('budgetContent').innerHTML=`
     <div class="bdg-hero">
-      <div><div class="bdg-route">✈️ ${b.from||FROM} → ${b.to||DEST}</div><div style="font-size:12px;color:var(--ts);margin-top:3px">${nights}-night trip · ${tLabel[tk]} · ${pLabel[p]}</div></div>
+      <div><div class="bdg-route">✈️ ${b.from||FROM} → ${b.to||DEST}</div><div style="font-size:12px;color:var(--ts);margin-top:3px">${nights}-night trip · ${tLabel[tk]} · ${paxLbl}</div></div>
       <div class="bdg-pills">${profileBtns}</div><button onclick="exportBudgetQuote()" style="height:32px;padding:0 12px;border-radius:8px;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#34d399;font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px">📄 Quote PDF</button>
     </div>
     <div style="margin-bottom:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tm)">Accommodation Tier</div>
     <div class="tier-row">${tierBtns}</div>
     <div class="bdg-total-card">
-      <div><div style="font-size:12px;font-weight:700;color:var(--ts);margin-bottom:4px">💰 Estimated Total Trip Cost</div><div class="bdg-grand">$${grand.toLocaleString()}</div><div style="font-size:12px;color:var(--tm);margin-top:4px">${pLabel[p]} · ${nights} nights · ${accom.label}</div></div>
+      <div><div style="font-size:12px;font-weight:700;color:var(--ts);margin-bottom:4px">💰 Estimated Total Trip Cost</div><div class="bdg-grand">$${grand.toLocaleString()}</div><div style="font-size:12px;color:var(--tm);margin-top:4px">${paxLbl} · ${nights} nights · ${accom.label}</div></div>
       <div style="text-align:right"><div class="bdg-perday">$${perDay.toLocaleString()}</div><div style="font-size:12px;color:var(--tm)">per day on ground</div><div style="font-size:11px;color:var(--tm);margin-top:4px">excl. flights, visa & insurance</div></div>
     </div>
     <div style="margin-bottom:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tm)">Full Cost Breakdown</div>
@@ -1939,14 +2678,12 @@ function renderLinksPanel(){
   var el=document.getElementById('linksContent');
   if(!el)return;
   if(s.status!=='done'||!s.content){el.innerHTML='<div class="empty"><div class="empty-ico">🔗</div><div class="empty-title">'+(s.status==='running'?'Building...':'Run a trip plan first')+'</div></div>';return;}
-  var d;
-  try{
-    var rw=s.content.replace(/<[^>]+>/g,' ').replace(/```json|```/gi,'').trim();
-    var si=rw.indexOf('{'),ei=rw.lastIndexOf('}');
-    if(si>=0&&ei>si)rw=rw.slice(si,ei+1);
-    rw=rw.replace(/,(\s*[}\]])/g,'$1');
-    d=JSON.parse(rw);
-  }catch(e){el.innerHTML='<div style="padding:18px;background:var(--card);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--ts)"><b style="color:var(--rose)">JSON parse failed — regenerate plan to refresh</b><br><br>'+s.content.replace(/<[^>]+>/g,'').slice(0,500)+'</div>';return;}
+  var d,linksRepaired=false;
+  try{d=JSON.parse(String(s.content).replace(/```json|```/gi,'').trim().replace(/,(\s*[}\]])/g,'$1'));}
+  catch(e1){
+    try{d=parseTolerantJSON(s.content);linksRepaired=true;}
+    catch(e2){el.innerHTML='<div style="padding:18px;background:var(--card);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--ts)"><b style="color:var(--rose)">JSON parse failed — regenerate plan to refresh</b><br><br>'+s.content.replace(/<[^>]+>/g,'').slice(0,500)+'</div>';return;}
+  }
   function bb(url,lbl){if(!url)return'';return'<a href="https://'+url.replace(/^https?:\/\//,'') +'" target="_blank" style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:6px;color:#93c5fd;font-size:11px;font-weight:600;text-decoration:none">'+lbl+'</a>';}
   function card(t,ico,col,rows){return'<div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:'+col+';margin-bottom:12px">'+ico+' '+t+'</div>'+rows+'</div>';}
   // Group airlines by category for Skyscanner-like presentation
@@ -1963,8 +2700,397 @@ function renderLinksPanel(){
   var vH=(d.visa_contacts||[]).map(function(v){return'<div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:5px">📋 '+(v.name||'')+'</div><div style="font-size:11px;color:var(--ts);line-height:1.9">'+(v.address?'📍 '+v.address+'<br>':'')+(v.phone?'📞 '+v.phone+'<br>':'')+(v.email?'✉️ <a href="mailto:'+v.email+'" style="color:var(--cyan)">'+v.email+'</a><br>':'')+(v.hours?'🕐 '+v.hours+'<br>':'')+(v.processing_days?'⏱ '+v.processing_days+'<br>':'')+bb(v.website,'Apply for Visa')+'</div></div>';}).join('');
   var agrH=(d.aggregators||[]).map(function(g){return'<div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)"><div style="font-size:20px">🔍</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--tp);margin-bottom:2px">'+(g.name||'')+'</div><div style="font-size:11px;color:var(--ts);margin-bottom:4px">'+(g.best_for||'')+'</div>'+bb(g.website,'Search')+'</div></div>';}).join('');
   var tH=(d.booking_tips||[]).map(function(t){return'<div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--ts)"><span>💡</span><span>'+t+'</span></div>';}).join('');
-  el.innerHTML=card('Airlines · By Route Type','✈️','#60A5FA',aH||'<div style="color:var(--tm);font-size:12px">No data</div>')+(agrH?card('Flight & Hotel Aggregators','🔍','#06B6D4',agrH):'')+card('Hotels','🏨','#34D399',hH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Travel Agencies','🏢','#F59E0B',agH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Visa Contacts','📋','#F43F5E',vH||'<div style="color:var(--tm);font-size:12px">No data</div>')+(tH?card('Booking Tips','💡','#8B5CF6',tH):'')+
+  el.innerHTML=(linksRepaired?'<div style="font-size:11px;color:#fbbf24;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:9px 12px;margin-bottom:14px">⚠️ AI response was truncated — showing partial data. Run the plan again for full coverage.</div>':'')+card('Airlines · By Route Type','✈️','#60A5FA',aH||'<div style="color:var(--tm);font-size:12px">No data</div>')+(agrH?card('Flight & Hotel Aggregators','🔍','#06B6D4',agrH):'')+card('Hotels','🏨','#34D399',hH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Travel Agencies','🏢','#F59E0B',agH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Visa Contacts','📋','#F43F5E',vH||'<div style="color:var(--tm);font-size:12px">No data</div>')+(tH?card('Booking Tips','💡','#8B5CF6',tH):'')+
   '<div style="font-size:11px;color:var(--tm);text-align:center;padding:8px">Verify all details directly with providers</div>';
+}
+
+/* ═══════════════════════════════════
+   DEALS & OFFERS PANEL
+═══════════════════════════════════ */
+function renderDealsPanel(){
+  var s=AS['deals']||{};
+  var el=document.getElementById('dealsContent');if(!el)return;
+  if(s.status==='running'){el.innerHTML='<div class="empty"><div class="empty-ico">🎁</div><div class="empty-title">Hunting the best deals for '+DEST+'…</div><div class="empty-sub">Scanning airline sales, credit card offers, loyalty programs and more.</div></div>';return;}
+  if(s.status!=='done'||!s.content){el.innerHTML='<div class="empty"><div class="empty-ico">🎁</div><div class="empty-title">Run a trip plan first</div><div class="empty-sub">Deals, card offers and loyalty tips will appear here after agents complete.</div></div>';return;}
+  var d,wasRepaired=false;
+  try{d=JSON.parse(String(s.content).replace(/```json|```/gi,'').trim().replace(/,(\s*[}\]])/g,'$1'));}
+  catch(e1){
+    try{d=parseTolerantJSON(s.content);wasRepaired=true;}
+    catch(e2){el.innerHTML='<div style="padding:18px;background:var(--card);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--ts)"><b style="color:var(--rose)">JSON parse failed — regenerate plan</b><br><br>'+String(s.content).replace(/<[^>]+>/g,'').slice(0,500)+'</div>';return;}
+  }
+
+  var extLink=function(u,label){if(!u)return'';var h=u.replace(/^https?:\/\//,'');return'<a class="deal-cta" href="https://'+h+'" target="_blank" rel="noopener">'+label+' →</a>';};
+
+  // Airline offers
+  var offH=(d.airline_offers||[]).map(function(o){
+    return '<div class="deal-item">'+
+      '<div class="deal-airline">'+escapeHTML(o.airline||'')+(o.route?'<span class="deal-badge">'+escapeHTML(o.route)+'</span>':'')+'</div>'+
+      '<div class="deal-off">🎯 '+escapeHTML(o.offer||'')+'</div>'+
+      '<div class="deal-meta">'+(o.code?'<span class="deal-code">'+escapeHTML(o.code)+'</span>':'')+
+      (o.booking_window?'📅 Book by: '+escapeHTML(o.booking_window)+' · ':'')+
+      (o.travel_window?'✈️ Travel: '+escapeHTML(o.travel_window):'')+
+      '</div>'+
+      extLink(o.link,'Book Now')+
+    '</div>';
+  }).join('');
+
+  // Credit card offers
+  var cardH=(d.credit_card_offers||[]).map(function(c){
+    var perks=(c.key_perks||[]).map(function(p){return'<li>'+escapeHTML(p)+'</li>';}).join('');
+    return '<div class="deal-card-c">'+
+      '<div class="deal-card-h">💳 '+escapeHTML(c.card||'')+'</div>'+
+      '<div class="deal-card-sub">'+escapeHTML(c.issuer||'')+(c.airline_partner?' · Partner: '+escapeHTML(c.airline_partner):'')+'</div>'+
+      (c.welcome_bonus?'<span class="deal-card-bonus">🎁 '+escapeHTML(c.welcome_bonus)+'</span>':'')+
+      (c.annual_fee?'<span class="deal-card-fee">Fee: '+escapeHTML(c.annual_fee)+'</span>':'')+
+      (perks?'<ul class="deal-perks">'+perks+'</ul>':'')+
+      (c.best_for?'<div class="deal-meta" style="margin-top:6px;font-style:italic">Best for: '+escapeHTML(c.best_for)+'</div>':'')+
+      extLink(c.apply_link,'Apply')+
+    '</div>';
+  }).join('');
+
+  // Loyalty programs
+  var loyH=(d.loyalty_programs||[]).map(function(l){
+    return '<div class="deal-item">'+
+      '<div class="deal-airline">🏆 '+escapeHTML(l.program||'')+(l.airline?'<span class="deal-tier-pill">'+escapeHTML(l.airline)+'</span>':'')+'</div>'+
+      (l.tier?'<div class="deal-off" style="color:#fbbf24">Tiers: '+escapeHTML(l.tier)+'</div>':'')+
+      '<div class="deal-meta">'+
+      (l.earn_rate?'💰 Earn: '+escapeHTML(l.earn_rate)+'<br>':'')+
+      (l.redemption_sweet_spot?'🎯 Sweet spot: '+escapeHTML(l.redemption_sweet_spot)+'<br>':'')+
+      (l.partner_alliances?'🤝 Alliance: '+escapeHTML(l.partner_alliances):'')+
+      '</div>'+
+      extLink(l.link,'Join / Sign in')+
+    '</div>';
+  }).join('');
+
+  // Lounges
+  var lngH=(d.lounge_access||[]).map(function(l){
+    return '<div class="deal-item">'+
+      '<div class="deal-airline">🛋️ '+escapeHTML(l.lounge||'')+'</div>'+
+      '<div class="deal-meta">'+(l.location?'📍 '+escapeHTML(l.location)+'<br>':'')+
+      (l.access_via?'🎟️ Access: '+escapeHTML(l.access_via)+'<br>':'')+
+      (l.notes?escapeHTML(l.notes):'')+'</div>'+
+    '</div>';
+  }).join('');
+
+  // Baggage perks
+  var bagH=(d.baggage_perks||[]).map(function(b){
+    return '<div class="deal-item">'+
+      '<div class="deal-airline">🧳 '+escapeHTML(b.airline||'')+'</div>'+
+      '<div class="deal-off">'+escapeHTML(b.perk||'')+'</div>'+
+      (b.how_to_get?'<div class="deal-meta">How: '+escapeHTML(b.how_to_get)+'</div>':'')+
+    '</div>';
+  }).join('');
+
+  // Flash sales
+  var flashH=(d.flash_sales||[]).map(function(f){
+    return '<div class="deal-item">'+
+      '<div class="deal-airline">⚡ '+escapeHTML(f.source||'')+'</div>'+
+      '<div class="deal-meta">'+escapeHTML(f.description||'')+'</div>'+
+      extLink(f.url,'Browse Deals')+
+    '</div>';
+  }).join('');
+
+  // Hotel loyalty
+  var hotelLoyH=(d.hotel_loyalty||[]).map(function(h){
+    return '<div class="deal-item">'+
+      '<div class="deal-airline">🏨 '+escapeHTML(h.program||'')+'</div>'+
+      '<div class="deal-meta">'+
+      (h.destination_status?'📍 '+escapeHTML(h.destination_status)+'<br>':'')+
+      (h.sweet_spot?'🎯 '+escapeHTML(h.sweet_spot):'')+
+      '</div>'+
+      extLink(h.link,'Join')+
+    '</div>';
+  }).join('');
+
+  // Pro tips
+  var tipsH=(d.pro_tips||[]).map(function(t){return'<div class="deal-tip"><span>💡</span><span>'+escapeHTML(t)+'</span></div>';}).join('');
+
+  var section=function(title,icon,color,content){if(!content)return'';return'<div class="deal-sec"><div class="deal-sec-h" style="color:'+color+'">'+icon+' '+title+'</div>'+content+'</div>';};
+
+  el.innerHTML=
+    '<div class="section-title" style="margin-bottom:6px">🎁 Deals, Offers &amp; Loyalty</div>'+
+    '<div style="font-size:12px;color:var(--ts);margin-bottom:16px">'+FROM+' → '+DEST+' · AI-curated offers for '+PROFILE+' travelers. Verify all deals directly with the provider before booking.</div>'+
+    (wasRepaired?'<div style="font-size:11px;color:#fbbf24;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:9px 12px;margin-bottom:14px">⚠️ AI response was truncated — partial data shown. Click <b>Launch All Agents</b> again to regenerate with full coverage.</div>':'')+
+    '<div class="deals-grid">'+
+      section('Airline Offers &amp; Sale Fares','🎯','#fb7185',offH)+
+      section('Credit Card Offers','💳','#a78bfa',cardH)+
+      section('Loyalty / Miles Programs','🏆','#fbbf24',loyH)+
+      section('Lounge Access','🛋️','#34d399',lngH)+
+      section('Baggage &amp; Travel Perks','🧳','#60a5fa',bagH)+
+      section('Flash Sale Sources','⚡','#f59e0b',flashH)+
+      section('Hotel Loyalty Programs','🏨','#22d3ee',hotelLoyH)+
+      section('Pro Tips','💡','#c084fc',tipsH)+
+    '</div>'+
+    '<div style="font-size:10px;color:var(--tm);text-align:center;padding:14px;margin-top:10px;border-top:1px solid var(--border)">⚠️ Offers change frequently. Welcome bonuses, promo codes and terms shown are AI-curated — always confirm current eligibility and terms on the provider\'s website.</div>';
+}
+
+/* ═══════════════════════════════════
+   FLIGHT TRACKER
+═══════════════════════════════════ */
+/* ═══════════════════════════════════
+   SAFETY & EMERGENCY PANEL
+═══════════════════════════════════ */
+function renderEmergencyPanel(){
+  var s=AS['emergency']||{};
+  var el=document.getElementById('emergencyContent');if(!el)return;
+  if(s.status==='running'){el.innerHTML='<div class="empty"><div class="empty-ico">🚨</div><div class="empty-title">Gathering hospitals, pharmacies & embassy info for '+DEST+'…</div></div>';return;}
+  if(s.status!=='done'||!s.content){el.innerHTML='<div class="empty"><div class="empty-ico">🚨</div><div class="empty-title">Run a trip plan first</div><div class="empty-sub">Safety info, hospitals, pharmacies and embassy contacts will appear here.</div></div>';return;}
+  var d,wasRepaired=false;
+  try{d=JSON.parse(String(s.content).replace(/```json|```/gi,'').trim().replace(/,(\s*[}\]])/g,'$1'));}
+  catch(e1){
+    try{d=parseTolerantJSON(s.content);wasRepaired=true;}
+    catch(e2){el.innerHTML='<div style="padding:18px;background:var(--card);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--ts)"><b style="color:var(--rose)">JSON parse failed — regenerate plan</b><br><br>'+String(s.content).replace(/<[^>]+>/g,'').slice(0,500)+'</div>';return;}
+  }
+
+  var telLink=function(num){if(!num)return'';var clean=String(num).replace(/\s/g,'');return'<a href="tel:'+clean+'">'+escapeHTML(num)+'</a>';};
+
+  // Emergency numbers hero
+  var en=d.emergency_numbers||{};
+  var numCells=[
+    {lbl:'🆘 Emergency',v:en.general_emergency},
+    {lbl:'🚑 Ambulance',v:en.ambulance},
+    {lbl:'🚓 Police',v:en.police},
+    {lbl:'🚒 Fire',v:en.fire},
+    {lbl:'🧳 Tourist Police',v:en.tourist_police}
+  ].filter(function(x){return x.v;}).map(function(x){
+    return '<div class="emg-num"><div class="emg-num-lbl">'+x.lbl+'</div><div class="emg-num-val">'+telLink(x.v)+'</div></div>';
+  }).join('');
+
+  var emergencyHero='<div class="emg-hero"><div class="emg-hero-h">🚨 Emergency Numbers in '+escapeHTML(DEST)+'</div><div class="emg-num-grid">'+(numCells||'<div style="color:var(--tm);font-size:12px">No emergency numbers available</div>')+'</div></div>';
+
+  // Safety rating
+  var ratingHTML='';
+  if(d.general_safety_rating){
+    var m=String(d.general_safety_rating).match(/(\d+(?:\.\d+)?)/);
+    var num=m?m[1]:'—';
+    var rest=String(d.general_safety_rating).replace(/^\s*\d+(?:\.\d+)?\s*\/?\s*10?\s*[·\-:]?\s*/,'').trim();
+    ratingHTML='<div class="emg-rating-card"><div class="emg-rating-num">'+num+'<span style="font-size:14px;color:var(--tm)">/10</span></div><div class="emg-rating-lbl"><b style="color:var(--tp)">Safety rating</b><br>'+escapeHTML(rest||'')+'</div></div>';
+  }
+
+  // Your embassy (hero card)
+  var embassyHTML='';
+  var emb=d.embassy||{};
+  if(emb.name){
+    var embRow=function(lbl,val,icon){if(!val)return'';var body=(lbl==='Phone'||lbl==='Hotline')?telLink(val):(lbl==='Email'?'<a href="mailto:'+escapeAttr(val)+'">'+escapeHTML(val)+'</a>':(lbl==='Website'?'<a href="'+escapeAttr(val.replace(/^https?:\/\//,'https://'))+'" target="_blank" rel="noopener">'+escapeHTML(val)+'</a>':escapeHTML(val)));return'<div class="emg-embassy-row"><div class="lbl">'+icon+' '+lbl+'</div><div>'+body+'</div></div>';};
+    embassyHTML=
+      '<div class="emg-embassy">'+
+        '<div class="emg-embassy-h">🏛️ '+escapeHTML(emb.country||FROM||'Your')+' Embassy / Consulate in '+escapeHTML(DEST)+'</div>'+
+        '<div class="emg-embassy-name">'+escapeHTML(emb.name)+'</div>'+
+        embRow('Address',emb.address,'📍')+
+        embRow('Phone',emb.phone,'📞')+
+        embRow('Hotline',emb.emergency_hotline,'🆘')+
+        embRow('Email',emb.email,'✉️')+
+        embRow('Website',emb.website,'🌐')+
+        embRow('Hours',emb.hours,'🕐')+
+        (emb.notes?'<div style="font-size:11px;color:var(--tm);margin-top:6px;font-style:italic">'+escapeHTML(emb.notes)+'</div>':'')+
+      '</div>';
+  }
+
+  // Hospitals
+  var hospH=(d.hospitals||[]).map(function(h){
+    var chips='';
+    if(h.english_speaking)chips+='<span class="emg-chip en">English</span>';
+    if(h.specialty&&/24.?7|emergency/i.test(h.specialty))chips+='<span class="emg-chip em">ER 24/7</span>';
+    if(h.pediatric)chips+='<span class="emg-chip kid">Pediatric</span>';
+    if(h.insurance_friendly)chips+='<span class="emg-chip ins">Insurance OK</span>';
+    return '<div class="emg-item">'+
+      '<div class="emg-name">🏥 '+escapeHTML(h.name||'')+chips+'</div>'+
+      '<div class="emg-meta">'+
+      (h.specialty?escapeHTML(h.specialty)+'<br>':'')+
+      (h.area?'📍 '+escapeHTML(h.area)+'<br>':'')+
+      (h.phone?'📞 <span class="emg-phone">'+telLink(h.phone)+'</span><br>':'')+
+      (h.notes?escapeHTML(h.notes):'')+
+      '</div></div>';
+  }).join('');
+
+  // Pharmacies
+  var pharmH=(d.pharmacies_24h||[]).map(function(p){
+    var chip=p.hours&&/24/.test(p.hours)?'<span class="emg-chip h24">24/7</span>':'';
+    return '<div class="emg-item">'+
+      '<div class="emg-name">💊 '+escapeHTML(p.name||'')+chip+'</div>'+
+      '<div class="emg-meta">'+
+      (p.area?'📍 '+escapeHTML(p.area)+'<br>':'')+
+      (p.phone?'📞 <span class="emg-phone">'+telLink(p.phone)+'</span><br>':'')+
+      (p.hours?'🕐 '+escapeHTML(p.hours)+'<br>':'')+
+      (p.notes?escapeHTML(p.notes):'')+
+      '</div></div>';
+  }).join('');
+
+  // Other embassies
+  var otherEmbH=(d.other_origin_embassies||[]).map(function(e){
+    return '<div class="emg-item">'+
+      '<div class="emg-name">🏛️ '+escapeHTML(e.country||'')+'</div>'+
+      '<div class="emg-meta">'+
+      (e.name?escapeHTML(e.name)+'<br>':'')+
+      (e.phone?'📞 '+telLink(e.phone)+'<br>':'')+
+      (e.notes?escapeHTML(e.notes):'')+
+      '</div></div>';
+  }).join('');
+
+  // Travel clinics
+  var clinicH=(d.travel_clinics||[]).map(function(c){
+    return '<div class="emg-item">'+
+      '<div class="emg-name">💉 '+escapeHTML(c.name||'')+'</div>'+
+      '<div class="emg-meta">'+
+      (c.services?escapeHTML(c.services)+'<br>':'')+
+      (c.area?'📍 '+escapeHTML(c.area)+'<br>':'')+
+      (c.phone?'📞 '+telLink(c.phone):'')+
+      '</div></div>';
+  }).join('');
+
+  // Vaccinations
+  var vacc=d.vaccinations||{};
+  var vaccH='';
+  if((vacc.required&&vacc.required.length)||(vacc.recommended&&vacc.recommended.length)){
+    vaccH=(vacc.required&&vacc.required.length?'<div class="emg-item"><div class="emg-name">⚠️ Required</div><div class="emg-meta">'+vacc.required.map(escapeHTML).join(' · ')+'</div></div>':'')+
+      (vacc.recommended&&vacc.recommended.length?'<div class="emg-item"><div class="emg-name">💡 Recommended</div><div class="emg-meta">'+vacc.recommended.map(escapeHTML).join(' · ')+'</div></div>':'')+
+      (vacc.notes?'<div class="emg-item"><div class="emg-meta" style="font-style:italic">'+escapeHTML(vacc.notes)+'</div></div>':'');
+  }
+
+  // Health & safety quick facts
+  var quickHTML='';
+  if(d.water_safety||d.food_safety||d.medical_insurance_advice){
+    quickHTML='<div class="emg-sec"><div class="emg-sec-h" style="color:#60a5fa">💧 Health Quick Facts</div>'+
+      (d.water_safety?'<div class="emg-item"><div class="emg-name">💧 Water</div><div class="emg-meta">'+escapeHTML(d.water_safety)+'</div></div>':'')+
+      (d.food_safety?'<div class="emg-item"><div class="emg-name">🍽 Food</div><div class="emg-meta">'+escapeHTML(d.food_safety)+'</div></div>':'')+
+      (d.medical_insurance_advice?'<div class="emg-item"><div class="emg-name">🛡 Insurance</div><div class="emg-meta">'+escapeHTML(d.medical_insurance_advice)+'</div></div>':'')+
+    '</div>';
+  }
+
+  // Tips
+  var tipsH=(d.safety_tips||[]).map(function(t){return'<div class="emg-tip"><span>🛡</span><span>'+escapeHTML(t)+'</span></div>';}).join('');
+  var scamsH=(d.common_scams||[]).map(function(t){return'<div class="emg-tip"><span>⚠️</span><span>'+escapeHTML(t)+'</span></div>';}).join('');
+  var lostH=(d.lost_passport_steps||[]).map(function(t,i){return'<div class="emg-tip"><span style="font-weight:700;color:var(--blue-l)">'+(i+1)+'.</span><span>'+escapeHTML(t)+'</span></div>';}).join('');
+
+  var section=function(title,icon,color,content){if(!content)return'';return'<div class="emg-sec"><div class="emg-sec-h" style="color:'+color+'">'+icon+' '+title+'</div>'+content+'</div>';};
+
+  el.innerHTML=
+    '<div class="section-title" style="margin-bottom:6px">🚨 Safety &amp; Emergency</div>'+
+    '<div style="font-size:12px;color:var(--ts);margin-bottom:16px">'+escapeHTML(DEST)+' · hospitals, pharmacies, embassy contacts &amp; safety info for travelers from '+escapeHTML(FROM||'your country')+'.'+(CHILDREN>0?' Includes pediatric hospital info for your '+CHILDREN+' child'+(CHILDREN===1?'':'ren')+'.':'')+'</div>'+
+    (wasRepaired?'<div style="font-size:11px;color:#fbbf24;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:9px 12px;margin-bottom:14px">⚠️ AI response was truncated — showing partial data. Launch agents again for full coverage.</div>':'')+
+    emergencyHero+
+    ratingHTML+
+    embassyHTML+
+    '<div class="emg-grid">'+
+      section('Hospitals · 24/7 ER','🏥','#fb7185',hospH)+
+      section('24/7 Pharmacies','💊','#34d399',pharmH)+
+      section('Other Country Embassies','🏛️','#93c5fd',otherEmbH)+
+      section('Travel Clinics','💉','#c084fc',clinicH)+
+      section('Vaccinations','💉','#fbbf24',vaccH)+
+      (quickHTML?'':'')+
+    '</div>'+
+    (quickHTML?'<div style="margin-top:14px">'+quickHTML+'</div>':'')+
+    '<div class="emg-grid" style="margin-top:14px">'+
+      section('Safety Tips','🛡','#34d399',tipsH)+
+      section('Common Scams to Avoid','⚠️','#fbbf24',scamsH)+
+      section('If You Lose Your Passport','📘','#60a5fa',lostH)+
+    '</div>'+
+    '<div style="font-size:10px;color:var(--tm);text-align:center;padding:14px;margin-top:10px;border-top:1px solid var(--border)">⚠️ Always verify hospital addresses, pharmacy hours and embassy contact details before travel — details can change. Save the most important numbers offline in your phone. In a life-threatening emergency, call the local emergency number first.</div>';
+}
+
+async function checkFlight(){
+  var airlineInp=(document.getElementById('trkAirline')||{}).value||'';
+  var flightInp=(document.getElementById('trkFlight')||{}).value||'';
+  airlineInp=airlineInp.trim();flightInp=flightInp.trim();
+
+  var out=document.getElementById('trackResult');
+  if(!airlineInp||!flightInp){out.innerHTML='<div class="track-result" style="color:var(--rose);font-size:13px">Please select an airline and enter a flight number.</div>';return;}
+
+  // Parse airline code: "Emirates · EK" → EK
+  var airlineName=airlineInp,airlineCode='';
+  if(airlineInp.includes(' · ')){var parts=airlineInp.split(' · ');airlineName=parts[0].trim();airlineCode=parts[1].trim();}
+  // If user typed a 2-char code alone, use it
+  if(!airlineCode&&/^[A-Z0-9]{2}$/i.test(airlineInp))airlineCode=airlineInp.toUpperCase();
+
+  // Clean flight number — extract digits, optionally prefixed by airline code
+  var flightDigits=flightInp.replace(/[^0-9]/g,'');
+  var flightFullCode='';
+  if(/^[A-Z0-9]{2}\d{1,4}$/i.test(flightInp))flightFullCode=flightInp.toUpperCase();
+  else if(airlineCode&&flightDigits)flightFullCode=airlineCode+flightDigits;
+  else flightFullCode=flightInp.toUpperCase();
+
+  var faURL='https://flightaware.com/live/flight/'+encodeURIComponent(flightFullCode);
+  var frURL='https://www.flightradar24.com/data/flights/'+encodeURIComponent(flightFullCode.toLowerCase());
+  var gflURL='https://www.google.com/search?q='+encodeURIComponent(flightFullCode+' flight status');
+  var fsURL='https://www.flightstats.com/v2/flight-tracker/'+encodeURIComponent(airlineCode||airlineName)+'/'+encodeURIComponent(flightDigits);
+
+  out.innerHTML=
+    '<div class="track-result">'+
+      '<div style="font-size:13px;font-weight:700;color:var(--tp);margin-bottom:4px">✈️ '+escapeHTML(airlineName)+' '+escapeHTML(flightFullCode)+'</div>'+
+      '<div style="font-size:11px;color:var(--ts);margin-bottom:6px">Live tracking available on the services below — click to see current status, map, altitude and history.</div>'+
+      '<div class="track-links">'+
+        '<a class="track-link" href="'+faURL+'" target="_blank" rel="noopener">🛩️ FlightAware</a>'+
+        '<a class="track-link" href="'+frURL+'" target="_blank" rel="noopener">📡 FlightRadar24</a>'+
+        '<a class="track-link" href="'+gflURL+'" target="_blank" rel="noopener">🔍 Google Status</a>'+
+        '<a class="track-link" href="'+fsURL+'" target="_blank" rel="noopener">📊 FlightStats</a>'+
+      '</div>'+
+      '<div id="trkAIBox" class="track-loading">Analyzing 7-day performance &amp; route reliability…</div>'+
+    '</div>';
+
+  if(!KEY){
+    var rawKey=((document.getElementById('akInput')||{}).value||'').trim();
+    if(rawKey&&rawKey.length>20&&!rawKey.includes('●'))KEY=rawKey;
+  }
+  if(!KEY){document.getElementById('trkAIBox').outerHTML='<div style="padding:12px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:12px;color:#fbbf24;margin-top:10px">⚠️ Save your Claude API key (top of page) to get the AI-powered 7-day performance summary.</div>';return;}
+
+  var prompt='Flight performance analyst. Analyze flight '+flightFullCode+' ('+airlineName+').\n\n'+
+    'Return ONLY valid JSON, no markdown:\n'+
+    '{\n'+
+    '  "route":"origin airport → destination airport (with city names + IATA codes)",\n'+
+    '  "aircraft":"typical aircraft type used on this route",\n'+
+    '  "frequency":"daily / weekly schedule",\n'+
+    '  "on_time_pct_estimate":"rough % on-time arrival based on airline avg and route",\n'+
+    '  "avg_delay_minutes":"typical delay when late (number)",\n'+
+    '  "reliability_rating":"1-10 with 1 line reason",\n'+
+    '  "common_delay_reasons":["reason 1","reason 2"],\n'+
+    '  "best_day_of_week":"day with historically best on-time record",\n'+
+    '  "worst_day_of_week":"day with worst on-time record",\n'+
+    '  "route_notes":"2-sentence summary of this route\'s reliability, typical issues, seasonal factors",\n'+
+    '  "airline_summary":"1-sentence overall reputation of '+airlineName+' for punctuality",\n'+
+    '  "confidence":"high|medium|low",\n'+
+    '  "disclaimer":"This is an AI estimate — confirm live status via tracking services above"\n'+
+    '}\n\n'+
+    'Be realistic. Base on general airline/route knowledge. If flight number is unknown or unusual, mark confidence=low and explain in route_notes.';
+  try{
+    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:900,messages:[{role:'user',content:prompt}]})});
+    if(!r.ok)throw new Error('API '+r.status);
+    var dd=await r.json();
+    var raw=(dd.content||[]).map(function(b){return b.text||'';}).join('').trim();
+    raw=raw.replace(/```json|```/gi,'').trim();
+    var si2=raw.indexOf('{'),ei2=raw.lastIndexOf('}');if(si2>=0&&ei2>si2)raw=raw.slice(si2,ei2+1);
+    raw=raw.replace(/,(\s*[}\]])/g,'$1');
+    var p=JSON.parse(raw);
+    renderFlightStats(p);
+  }catch(e){
+    document.getElementById('trkAIBox').outerHTML='<div style="padding:12px;background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.2);border-radius:8px;font-size:12px;color:var(--rose);margin-top:10px">Could not fetch performance summary: '+escapeHTML(e.message)+'</div>';
+  }
+}
+
+function renderFlightStats(p){
+  var box=document.getElementById('trkAIBox');if(!box)return;
+  var pct=String(p.on_time_pct_estimate||'').replace(/%/g,'')||'—';
+  var confCol={high:'#34d399',medium:'#fbbf24',low:'#f87171'}[p.confidence||'medium']||'#94a3b8';
+  var relN=parseFloat(p.reliability_rating)||0;var relLine=typeof p.reliability_rating==='string'?p.reliability_rating:'';
+  var reasons=(p.common_delay_reasons||[]).map(function(r){return'<li>'+escapeHTML(r)+'</li>';}).join('');
+  box.outerHTML=
+    '<div class="track-body" style="margin-top:14px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">'+
+        '<div style="font-size:13px;font-weight:700;color:var(--tp)">📊 7-Day Performance &amp; Route Intelligence</div>'+
+        '<span style="font-size:10px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.03);border:1px solid var(--border);color:'+confCol+'">AI confidence: '+(p.confidence||'medium')+'</span>'+
+      '</div>'+
+      '<div class="track-stats">'+
+        '<div class="track-stat"><div class="track-stat-lbl">On-Time %</div><div class="track-stat-val" style="color:#34d399">'+pct+'%</div><div class="track-stat-sub">arrivals (estimate)</div></div>'+
+        '<div class="track-stat"><div class="track-stat-lbl">Avg Delay</div><div class="track-stat-val" style="color:#fbbf24">'+(p.avg_delay_minutes||'—')+'<span style="font-size:12px;font-weight:600">min</span></div><div class="track-stat-sub">when delayed</div></div>'+
+        '<div class="track-stat"><div class="track-stat-lbl">Reliability</div><div class="track-stat-val" style="color:#60a5fa">'+(relN||'—')+'<span style="font-size:12px;font-weight:600">/10</span></div><div class="track-stat-sub">overall rating</div></div>'+
+        '<div class="track-stat"><div class="track-stat-lbl">Best Day</div><div class="track-stat-val" style="font-size:14px;color:#34d399">'+escapeHTML(p.best_day_of_week||'—')+'</div><div class="track-stat-sub">historically on-time</div></div>'+
+      '</div>'+
+      (p.route?'<h4>✈️ Route</h4><div style="font-size:12px;color:var(--ts);line-height:1.6">'+escapeHTML(p.route)+(p.aircraft?' · Aircraft: <b>'+escapeHTML(p.aircraft)+'</b>':'')+(p.frequency?' · '+escapeHTML(p.frequency):'')+'</div>':'')+
+      (p.route_notes?'<h4>🗺 Route Notes</h4><div style="font-size:12px;color:var(--ts);line-height:1.6">'+escapeHTML(p.route_notes)+'</div>':'')+
+      (reasons?'<h4>⚠️ Common Delay Reasons</h4><ul style="font-size:12px;color:var(--ts);padding-left:18px;line-height:1.7">'+reasons+'</ul>':'')+
+      (p.worst_day_of_week?'<div style="font-size:11px;color:var(--tm);margin-top:8px">⏰ Worst day historically: <b style="color:#f87171">'+escapeHTML(p.worst_day_of_week)+'</b></div>':'')+
+      (p.airline_summary?'<div style="margin-top:12px;padding:10px;background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.15);border-radius:8px;font-size:12px;color:var(--ts);line-height:1.6"><b style="color:var(--blue-l)">About '+escapeHTML((p.airline_summary.split(' ')[0]||'')) +':</b> '+escapeHTML(p.airline_summary)+'</div>':'')+
+      '<div style="font-size:10px;color:var(--tm);margin-top:12px;padding-top:10px;border-top:1px solid var(--border);text-align:center">'+escapeHTML(p.disclaimer||'AI-generated estimate. Verify live status via the tracking services above.')+'</div>'+
+    '</div>';
 }
 
 function exportFullReportPDF(){
@@ -1972,7 +3098,7 @@ function exportFullReportPDF(){
   var nights=(_BDG&&_BDG.nights)||(_ITIN&&_ITIN.nights)||7;
   var stripHTML=function(s){return(s||'').replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<style[\s\S]*?<\/style>/gi,'');};
   var agentSection=function(a){
-    var s=AS[a.id];if(!s||s.status!=='done'||!s.content||a.id==='links')return '';
+    var s=AS[a.id];if(!s||s.status!=='done'||!s.content||a.id==='links'||a.id==='deals'||a.id==='emergency')return '';
     var html=stripHTML(s.content);
     return '<section class="rp-sec"><h2>'+a.icon+' '+a.name+'</h2><div class="rp-body">'+html+'</div></section>';
   };
@@ -2006,7 +3132,7 @@ function exportFullReportPDF(){
     var grand=flA+acA+fdA+trA+enA+entry+msA+vsA+inA;
     budgetHTML='<section class="rp-sec"><h2>💰 Budget Breakdown ('+({solo:'Solo',couple:'Couple',family4:'Family of 4'}[p])+' · '+nn+' nights)</h2>'+
       '<table class="rp-tbl"><thead><tr><th>Item</th><th>Detail</th><th style="text-align:right">USD</th></tr></thead><tbody>'+
-      '<tr><td>Round-trip Flights</td><td>Economy</td><td style="text-align:right">$'+flA.toLocaleString()+'</td></tr>'+
+      '<tr><td>'+((_BDG&&_BDG.trip_type==='one-way')||TRIP_TYPE==='one'?'One-way Flights':'Round-trip Flights')+'</td><td>Economy</td><td style="text-align:right">$'+flA.toLocaleString()+'</td></tr>'+
       '<tr><td>Accommodation</td><td>'+nn+' nights</td><td style="text-align:right">$'+acA.toLocaleString()+'</td></tr>'+
       '<tr><td>Food</td><td>$'+(fd[p]||0)+'/day</td><td style="text-align:right">$'+fdA.toLocaleString()+'</td></tr>'+
       '<tr><td>Local Transport</td><td>$'+(tr[p]||0)+'/day</td><td style="text-align:right">$'+trA.toLocaleString()+'</td></tr>'+
@@ -2034,6 +3160,48 @@ function exportFullReportPDF(){
       linksHTML='<section class="rp-sec"><h2>🔗 Booking Directory</h2>'+
         (aRows?'<h3>Airlines</h3><table class="rp-tbl"><thead><tr><th>Airline</th><th>Type</th><th>Route</th><th>From</th><th>Website</th></tr></thead><tbody>'+aRows+'</tbody></table>':'')+
         (hRows?'<h3>Hotels</h3><table class="rp-tbl"><thead><tr><th>Hotel</th><th>Tier</th><th>Area</th><th>$/night</th><th>Website</th></tr></thead><tbody>'+hRows+'</tbody></table>':'')+
+        '</section>';
+    }catch(e){}
+  }
+
+  // Safety & Emergency section
+  var emergencyHTML='';
+  var es=AS['emergency'];
+  if(es&&es.status==='done'&&es.content){
+    try{
+      var ed;try{ed=JSON.parse(String(es.content).replace(/```json|```/gi,'').trim().replace(/,(\s*[}\]])/g,'$1'));}catch(e1){ed=parseTolerantJSON(es.content);}
+      var numRows='';
+      var eeN=ed.emergency_numbers||{};
+      [['Emergency',eeN.general_emergency],['Ambulance',eeN.ambulance],['Police',eeN.police],['Fire',eeN.fire],['Tourist Police',eeN.tourist_police]].forEach(function(p){if(p[1])numRows+='<tr><td>'+p[0]+'</td><td><b>'+p[1]+'</b></td></tr>';});
+      var hospRows=(ed.hospitals||[]).map(function(h){return'<tr><td><b>'+(h.name||'')+'</b></td><td>'+(h.area||'')+'</td><td>'+(h.phone||'')+'</td><td>'+(h.specialty||'')+'</td></tr>';}).join('');
+      var pharmRows=(ed.pharmacies_24h||[]).map(function(p){return'<tr><td><b>'+(p.name||'')+'</b></td><td>'+(p.area||'')+'</td><td>'+(p.phone||'')+'</td><td>'+(p.hours||'')+'</td></tr>';}).join('');
+      var embB=ed.embassy||{};
+      var embHTML='';
+      if(embB.name){
+        embHTML='<h3>🏛️ '+(embB.country||FROM||'Your')+' Embassy / Consulate</h3>'+
+          '<table class="rp-tbl"><tbody>'+
+          (embB.name?'<tr><td style="width:140px"><b>Name</b></td><td>'+embB.name+'</td></tr>':'')+
+          (embB.address?'<tr><td><b>Address</b></td><td>'+embB.address+'</td></tr>':'')+
+          (embB.phone?'<tr><td><b>Phone</b></td><td><b>'+embB.phone+'</b></td></tr>':'')+
+          (embB.emergency_hotline?'<tr><td><b>Emergency Hotline</b></td><td><b style="color:#dc2626">'+embB.emergency_hotline+'</b></td></tr>':'')+
+          (embB.email?'<tr><td><b>Email</b></td><td>'+embB.email+'</td></tr>':'')+
+          (embB.website?'<tr><td><b>Website</b></td><td>'+embB.website+'</td></tr>':'')+
+          (embB.hours?'<tr><td><b>Hours</b></td><td>'+embB.hours+'</td></tr>':'')+
+          '</tbody></table>';
+      }
+      var scamsL=(ed.common_scams||[]).map(function(s){return'<li>'+s+'</li>';}).join('');
+      var safeL=(ed.safety_tips||[]).map(function(s){return'<li>'+s+'</li>';}).join('');
+      var lostL=(ed.lost_passport_steps||[]).map(function(s){return'<li>'+s+'</li>';}).join('');
+      emergencyHTML='<section class="rp-sec"><h2>🚨 Safety &amp; Emergency</h2>'+
+        (numRows?'<h3>Emergency Numbers</h3><table class="rp-tbl"><thead><tr><th>Service</th><th>Number</th></tr></thead><tbody>'+numRows+'</tbody></table>':'')+
+        (ed.general_safety_rating?'<p><b>Safety rating:</b> '+ed.general_safety_rating+'</p>':'')+
+        embHTML+
+        (hospRows?'<h3>🏥 Hospitals</h3><table class="rp-tbl"><thead><tr><th>Name</th><th>Area</th><th>Phone</th><th>Notes</th></tr></thead><tbody>'+hospRows+'</tbody></table>':'')+
+        (pharmRows?'<h3>💊 24/7 Pharmacies</h3><table class="rp-tbl"><thead><tr><th>Name</th><th>Area</th><th>Phone</th><th>Hours</th></tr></thead><tbody>'+pharmRows+'</tbody></table>':'')+
+        (ed.water_safety||ed.food_safety||ed.medical_insurance_advice?'<h3>Health Quick Facts</h3><ul>'+(ed.water_safety?'<li><b>Water:</b> '+ed.water_safety+'</li>':'')+(ed.food_safety?'<li><b>Food:</b> '+ed.food_safety+'</li>':'')+(ed.medical_insurance_advice?'<li><b>Insurance:</b> '+ed.medical_insurance_advice+'</li>':'')+'</ul>':'')+
+        (safeL?'<h3>🛡 Safety Tips</h3><ul>'+safeL+'</ul>':'')+
+        (scamsL?'<h3>⚠️ Common Scams</h3><ul>'+scamsL+'</ul>':'')+
+        (lostL?'<h3>📘 If You Lose Your Passport</h3><ol>'+lostL+'</ol>':'')+
         '</section>';
     }catch(e){}
   }
@@ -2080,14 +3248,15 @@ function exportFullReportPDF(){
 
   // Build TOC
   var tocItems=[];
-  AGENTS.forEach(function(a){if(AS[a.id]&&AS[a.id].status==='done'&&a.id!=='links')tocItems.push(a.icon+' '+a.name);});
+  AGENTS.forEach(function(a){if(AS[a.id]&&AS[a.id].status==='done'&&a.id!=='links'&&a.id!=='deals'&&a.id!=='emergency')tocItems.push(a.icon+' '+a.name);});
   if(itinHTML)tocItems.push('📅 Day-by-Day Itinerary');
   if(budgetHTML)tocItems.push('💰 Budget Breakdown');
   if(linksHTML)tocItems.push('🔗 Booking Directory');
+  if(emergencyHTML)tocItems.push('🚨 Safety & Emergency');
 
   var fullDoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>TravelMind Report · '+DEST+'</title><style>'+css+'</style></head><body>'+
     '<div class="rp-cov"><h1>'+DEST+'</h1><div class="sub">AI-Researched Travel Intelligence Report</div>'+
-    '<div class="meta"><span>✈️ From '+(FROM||'—')+'</span><span>👤 '+(PROFILE.charAt(0).toUpperCase()+PROFILE.slice(1))+' traveler</span><span>🌙 '+nights+' nights</span><span>📅 '+today+'</span></div></div>'+
+    '<div class="meta"><span>✈️ From '+(FROM||'—')+'</span><span>👥 '+paxSummary()+'</span><span>👤 '+(PROFILE.charAt(0).toUpperCase()+PROFILE.slice(1))+'</span><span>🌙 '+nights+' nights</span><span>📅 '+today+'</span></div></div>'+
     '<div class="rp-toc"><h3>Contents</h3><ol>'+tocItems.map(function(t){return'<li>'+t+'</li>';}).join('')+'</ol></div>'+
     agentsHTML+itinHTML+budgetHTML+linksHTML+
     '<div class="rp-foot">Generated by TravelMind AI · '+today+'<br>Budgetary estimates for planning only. Prices are approximate USD and vary by date, season and availability. Always verify flight availability, hotel rates, and visa requirements through official sources before booking.</div>'+
@@ -2116,7 +3285,7 @@ function exportBudgetQuote(){
     '<div style="font-size:24px;font-weight:800;margin:8px 0">✈️ '+(b.from||FROM||'')+' → '+(b.to||DEST||'')+'</div>'+
     '<div style="font-size:12px;opacity:.8">'+nights+' nights · '+(tL[tk]||tk)+' · '+(pL[p]||p)+' · '+today+'</div></div>'+
     '<table><thead><tr><th>Item</th><th>Detail</th><th style="text-align:right">USD</th></tr></thead><tbody>'+
-    '<tr><td>Return Flights (Economy)</td><td>Round-trip</td><td style="text-align:right">$'+flA.toLocaleString()+'</td></tr>'+
+    '<tr><td>'+((b.trip_type==='one-way')||TRIP_TYPE==='one'?'One-way Flights (Economy)':'Return Flights (Economy)')+'</td><td>'+((b.trip_type==='one-way')||TRIP_TYPE==='one'?'One-way':'Round-trip')+'</td><td style="text-align:right">$'+flA.toLocaleString()+'</td></tr>'+
     '<tr><td>Accommodation</td><td>'+(ac.label||tL[tk])+' × '+nights+' nights @ $'+(ac[p]||0)+'/night</td><td style="text-align:right">$'+acA.toLocaleString()+'</td></tr>'+
     '<tr><td>Food & Dining</td><td>$'+(fd[p]||0)+'/day × '+nights+' days</td><td style="text-align:right">$'+fdA.toLocaleString()+'</td></tr>'+
     '<tr><td>Local Transport</td><td>$'+(tr[p]||0)+'/day × '+nights+' days</td><td style="text-align:right">$'+trA.toLocaleString()+'</td></tr>'+
