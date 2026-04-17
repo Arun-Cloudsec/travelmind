@@ -192,6 +192,22 @@ a{color:inherit;text-decoration:none;}
 .launch-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;}
 .dur-badge{font-size:11px;color:var(--cyan);font-weight:600;background:rgba(6,182,212,.1);padding:2px 10px;border-radius:20px;border:1px solid rgba(6,182,212,.2);}
 
+/* GEO SUGGEST DROPDOWN */
+.geo-sugg{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);border:1px solid var(--borderM);border-radius:var(--r8);box-shadow:var(--shadow-lg);z-index:50;max-height:280px;overflow-y:auto;display:none;}
+.geo-sugg.show{display:block;}
+.geo-sugg-item{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s;}
+.geo-sugg-item:last-child{border-bottom:none;}
+.geo-sugg-item:hover,.geo-sugg-item.sel{background:rgba(59,130,246,.09);}
+.geo-sugg-flag{font-size:18px;flex-shrink:0;}
+.geo-sugg-main{flex:1;min-width:0;}
+.geo-sugg-name{font-size:13px;font-weight:600;color:var(--tp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.geo-sugg-sub{font-size:11px;color:var(--ts);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.geo-sugg-pop{font-size:10px;color:var(--tm);flex-shrink:0;}
+.geo-sugg-empty{padding:12px;font-size:12px;color:var(--tm);text-align:center;}
+.geo-sugg-loading{padding:12px;font-size:12px;color:var(--ts);text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;}
+.geo-sugg-loading::before{content:'';width:10px;height:10px;border:2px solid var(--border);border-top-color:var(--blue-l);border-radius:50%;animation:geospin .6s linear infinite;}
+@keyframes geospin{to{transform:rotate(360deg);}}
+
 /* API KEY SECTION */
 .apikey-section{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.18);border-radius:var(--r12);padding:16px 18px;margin-bottom:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
 .ak-ico{font-size:18px;flex-shrink:0;}
@@ -287,6 +303,13 @@ a{color:inherit;text-decoration:none;}
 .comp-tbl td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--ts);}
 .comp-tbl tr:last-child td{border:none;}
 .comp-tbl .best{color:var(--emerald);font-weight:600;}
+.md-tbl-wrap{overflow-x:auto;margin:10px 0 14px;border:1px solid var(--border);border-radius:var(--r8);background:rgba(255,255,255,.015);}
+.md-tbl{width:100%;border-collapse:collapse;font-size:11.5px;min-width:480px;}
+.md-tbl th{padding:8px 10px;text-align:left;color:var(--blue-l);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:rgba(59,130,246,.06);border-bottom:1px solid var(--borderM);white-space:nowrap;}
+.md-tbl td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--tp);line-height:1.45;vertical-align:top;}
+.md-tbl tr:last-child td{border-bottom:none;}
+.md-tbl tr:hover td{background:rgba(59,130,246,.04);}
+.md-tbl td:first-child{font-weight:600;color:var(--tp);}
 
 /* ═══════════════════════════════════
    ITINERARY
@@ -563,9 +586,11 @@ a{color:inherit;text-decoration:none;}
           <div class="pfield">
             <div class="pfield-label">📍 Destinations</div>
             <div style="display:flex;gap:6px;align-items:center;">
-              <div class="dest-chips-wrap" style="flex:1" onclick="document.getElementById('destInput').focus()">
-                <div id="destChips" style="display:contents"></div>
-                <input class="dest-input-inner" id="destInput" placeholder="Type city then press Enter…" onkeydown="destKey(event)" autocomplete="off"/>
+              <div style="flex:1;position:relative">
+                <div class="dest-chips-wrap" onclick="document.getElementById('destInput').focus()">
+                  <div id="destChips" style="display:contents"></div>
+                  <input class="dest-input-inner" id="destInput" placeholder="Type city, e.g. Paris…" onkeydown="destKey(event)" autocomplete="off"/>
+                </div>
               </div>
               <button onclick="addDest()" style="height:42px;padding:0 14px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);border-radius:var(--r8);color:#93c5fd;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">+ Add</button>
             </div>
@@ -619,6 +644,7 @@ a{color:inherit;text-decoration:none;}
       <button class="ctab" id="ctab-agency" onclick="sw('agency')">🏢 Agencies</button>
       <button class="ctab" id="ctab-sim" onclick="sw('sim')">📱 SIM</button>
       <button class="ctab" id="ctab-links" onclick="sw('links')">🔗 Book</button>
+      <button class="ctab" onclick="exportFullReportPDF()" style="margin-left:auto;background:linear-gradient(135deg,rgba(29,78,216,.35),rgba(8,145,178,.35));border:1px solid rgba(59,130,246,.55);color:#bfdbfe;font-weight:700">📄 Download PDF Report</button>
     </div>
 
     <!-- DASHBOARD -->
@@ -681,7 +707,7 @@ a{color:inherit;text-decoration:none;}
 
     <!-- ITINERARY -->
     <div class="panel" id="panel-itin">
-      <div id="itinContent"><div class="empty"><div class="empty-ico">📅</div><div class="empty-title">Itinerary appears after agents complete</div></div></div>
+      <div id="itinContent"><div class="empty"><div class="empty-ico">📅</div><div class="empty-title">Day-by-day itinerary appears here</div><div class="empty-sub">For each day of your trip: breakfast spot, morning activity with time & cost, lunch, afternoon plan, dinner, night option, transport notes, daily budget estimate, and a pro tip. Run a trip plan to generate it.</div></div></div>
     </div>
 
     <!-- BUDGET -->
@@ -892,6 +918,7 @@ function initApp(){
   try{loadRates();}catch(e){}
   try{renderHistory();}catch(e){}
   try{setDefaultDates();}catch(e){}
+  try{initGeoSuggest();}catch(e){console.warn('geoSuggest:',e);}
   try{
     const h=location.hash;
     if(h.includes('dest=')){const d=decodeURIComponent(h.split('dest=')[1]);if(d){document.getElementById('destInput').value=d;addDest();}}
@@ -1032,38 +1059,258 @@ function hdrs(){return{'Content-Type':'application/json','x-api-key':KEY,'anthro
    TRIP INPUTS
 ═══════════════════════════════════ */
 let DESTS_ARR=[];
-function destKey(e){if(e.key==='Enter'||e.key===','){e.preventDefault();const v=e.target.value.trim();if(v){addDest(v);e.target.value='';}}if(e.key==='Backspace'&&!e.target.value&&DESTS_ARR.length){DESTS_ARR.pop();renderChips();}}
-function addDest(d){const v=(d||document.getElementById('destInput').value.trim());if(!v||DESTS_ARR.includes(v))return;DESTS_ARR.push(v);renderChips();document.getElementById('destInput').value='';}
+function destKey(e){
+  // Let the geo-suggest dropdown intercept arrow keys / Enter / Escape first
+  if(window.__geoActive==='destInput'){
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'||e.key==='Escape')return;
+    if(e.key==='Enter'&&document.querySelector('#destInput-sugg .sel'))return;
+  }
+  if(e.key==='Enter'||e.key===','){e.preventDefault();const v=e.target.value.trim();if(v){addDest(v);e.target.value='';geoHide('destInput');}}
+  if(e.key==='Backspace'&&!e.target.value&&DESTS_ARR.length){DESTS_ARR.pop();renderChips();}
+}
+function addDest(d){const v=(d||document.getElementById('destInput').value.trim());if(!v||DESTS_ARR.includes(v))return;DESTS_ARR.push(v);renderChips();document.getElementById('destInput').value='';geoHide('destInput');}
+
+/* ═══════════════════════════════════
+   GEO SUGGEST (city autocomplete)
+═══════════════════════════════════ */
+var _geoCache={},_geoTimer=null,_geoCtrl=null;
+function ccToFlag(cc){if(!cc||cc.length!==2)return'📍';try{return cc.toUpperCase().replace(/./g,function(c){return String.fromCodePoint(127397+c.charCodeAt(0));});}catch(e){return'📍';}}
+function geoBoxForInput(inpId){
+  var inp=document.getElementById(inpId);if(!inp)return null;
+  var existing=document.getElementById(inpId+'-sugg');if(existing)return existing;
+  var parent=(inpId==='destInput')?inp.closest('.dest-chips-wrap').parentElement:inp.closest('.pinp-wrap');
+  if(!parent)return null;
+  var box=document.createElement('div');box.id=inpId+'-sugg';box.className='geo-sugg';parent.appendChild(box);
+  return box;
+}
+function geoHide(inpId){var b=document.getElementById(inpId+'-sugg');if(b)b.classList.remove('show');}
+function geoShow(inpId){var b=document.getElementById(inpId+'-sugg');if(b)b.classList.add('show');}
+async function geoFetch(query){
+  query=query.trim();if(query.length<2)return[];
+  var key=query.toLowerCase();if(_geoCache[key])return _geoCache[key];
+  if(_geoCtrl)try{_geoCtrl.abort();}catch(e){}
+  _geoCtrl=('AbortController' in window)?new AbortController():null;
+  try{
+    var url='https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(query)+'&count=8&language=en&format=json';
+    var r=await fetch(url,_geoCtrl?{signal:_geoCtrl.signal}:{});
+    if(!r.ok)return[];
+    var d=await r.json();
+    var results=(d.results||[]).map(function(x){return{name:x.name,country:x.country||'',cc:x.country_code||'',admin:x.admin1||'',pop:x.population||0,lat:x.latitude,lon:x.longitude};});
+    // Sort by population desc so major cities appear first
+    results.sort(function(a,b){return(b.pop||0)-(a.pop||0);});
+    _geoCache[key]=results;
+    return results;
+  }catch(e){if(e.name!=='AbortError')console.warn('[geo]',e);return[];}
+}
+function geoRender(inpId,results,query){
+  var box=geoBoxForInput(inpId);if(!box)return;
+  if(!results.length){box.innerHTML='<div class="geo-sugg-empty">No matches for "'+escapeHTML(query)+'" — press Enter to add anyway</div>';geoShow(inpId);return;}
+  box.innerHTML=results.slice(0,8).map(function(r,i){
+    var sub=[r.admin,r.country].filter(Boolean).join(' · ');
+    var pop=r.pop>0?(r.pop>1e6?Math.round(r.pop/1e5)/10+'M':r.pop>1e3?Math.round(r.pop/1e3)+'K':r.pop):'';
+    return '<div class="geo-sugg-item" data-idx="'+i+'" data-name="'+escapeAttr(r.name)+'" data-country="'+escapeAttr(r.country)+'" onclick="geoPick(\''+inpId+'\','+i+')"><div class="geo-sugg-flag">'+ccToFlag(r.cc)+'</div><div class="geo-sugg-main"><div class="geo-sugg-name">'+escapeHTML(r.name)+'</div>'+(sub?'<div class="geo-sugg-sub">'+escapeHTML(sub)+'</div>':'')+'</div>'+(pop?'<div class="geo-sugg-pop">'+pop+'</div>':'')+'</div>';
+  }).join('');
+  box._results=results;
+  geoShow(inpId);
+}
+function geoPick(inpId,idx){
+  var box=document.getElementById(inpId+'-sugg');if(!box||!box._results)return;
+  var r=box._results[idx];if(!r)return;
+  var label=r.name+(r.country?', '+r.country:'');
+  var inp=document.getElementById(inpId);
+  if(inpId==='destInput'){addDest(label);}
+  else{inp.value=label;}
+  geoHide(inpId);
+}
+function escapeHTML(s){return(s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escapeAttr(s){return escapeHTML(s).replace(/"/g,'&quot;');}
+function geoAttach(inpId){
+  var inp=document.getElementById(inpId);if(!inp)return;
+  geoBoxForInput(inpId);
+  inp.addEventListener('input',function(){
+    window.__geoActive=inpId;
+    var q=inp.value.trim();
+    if(_geoTimer)clearTimeout(_geoTimer);
+    if(q.length<2){geoHide(inpId);return;}
+    var box=geoBoxForInput(inpId);if(box){box.innerHTML='<div class="geo-sugg-loading">Searching…</div>';geoShow(inpId);}
+    _geoTimer=setTimeout(async function(){
+      var cur=inp.value.trim();if(cur!==q)return;
+      var res=await geoFetch(q);
+      if(inp.value.trim()!==q)return; // user kept typing
+      geoRender(inpId,res,q);
+    },240);
+  });
+  inp.addEventListener('focus',function(){window.__geoActive=inpId;if(inp.value.trim().length>=2){var box=document.getElementById(inpId+'-sugg');if(box&&box._results&&box._results.length)geoShow(inpId);}});
+  inp.addEventListener('blur',function(){setTimeout(function(){geoHide(inpId);},180);});
+  inp.addEventListener('keydown',function(e){
+    var box=document.getElementById(inpId+'-sugg');if(!box||!box.classList.contains('show'))return;
+    var items=box.querySelectorAll('.geo-sugg-item');if(!items.length)return;
+    var cur=box.querySelector('.geo-sugg-item.sel'),curIdx=cur?parseInt(cur.dataset.idx):-1;
+    if(e.key==='ArrowDown'){e.preventDefault();var n=(curIdx+1)%items.length;items.forEach(function(i){i.classList.remove('sel');});items[n].classList.add('sel');items[n].scrollIntoView({block:'nearest'});}
+    else if(e.key==='ArrowUp'){e.preventDefault();var p=curIdx<=0?items.length-1:curIdx-1;items.forEach(function(i){i.classList.remove('sel');});items[p].classList.add('sel');items[p].scrollIntoView({block:'nearest'});}
+    else if(e.key==='Enter'&&cur){e.preventDefault();geoPick(inpId,parseInt(cur.dataset.idx));}
+    else if(e.key==='Escape'){geoHide(inpId);}
+  });
+}
+function initGeoSuggest(){geoAttach('fromInp');geoAttach('destInput');}
 function remDest(i){DESTS_ARR.splice(i,1);renderChips();}
 function renderChips(){document.getElementById('destChips').innerHTML=DESTS_ARR.map((d,i)=>`<span class="dest-chip">${d}<button class="chip-rm" onclick="remDest(${i})">×</button></span>`).join('');}
 function calcDur(){
   const f=document.getElementById('dFrom').value,t=document.getElementById('dTo').value;
   if(f&&t){const n=Math.round((new Date(t)-new Date(f))/864e5);const el=document.getElementById('tb-dur');el.textContent=n>0?n+' days':'';el.style.display=n>0?'block':'none';}
 }
-function setProfile(p,el){PROFILE=p;document.querySelectorAll('.prbtn').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+function setProfile(p,el){PROFILE=p;document.querySelectorAll('.prbtn').forEach(b=>b.classList.remove('active'));el.classList.add('active');BDG_P=profileToBdg(p);try{if(typeof drawBudget==='function'&&_BDG)drawBudget();}catch(e){}}
+function profileToBdg(p){return{solo:'solo',couple:'couple',family:'family4',business:'solo'}[p]||'solo';}
 function pCtx(){return{solo:'Focus on solo-friendly, independent traveler tips, safety for solo, social hostels.',couple:'Focus on romantic experiences, couple activities, intimate dining, mid-range luxury.',family:'Focus on child-friendly attractions, family rooms, safety, practical family tips, baby facilities.',business:'Focus on business hotels, fast connectivity, executive dining, airport transport, efficient planning.'}[PROFILE]||'';}
 
 /* ═══════════════════════════════════
    AGENT DEFINITIONS
 ═══════════════════════════════════ */
 const AGENTS=[
-  {id:'flights',name:'Flight Finder',desc:'Airlines · Routes · Fares',icon:'✈️',col:'rgba(59,130,246,.12)',bc:'rgba(59,130,246,.25)',claude:true,
-   p:d=>`You are an expert flight research agent. Route: ${FROM||'major hub'} → ${d}. Traveler profile: ${PROFILE}. ${pCtx()}
-Research and provide: best airlines for this route (budget & full-service), typical round-trip economy fares in USD per person from ${FROM||'common hubs'}, business class fare range, approximate flight durations, stop options, cheapest months/days to fly, best booking platforms (Google Flights/Skyscanner/Kayak/Hopper), booking window tips, baggage policy notes, and transit visa warnings if applicable.
-Use **bold** for headings. Keep under 320 words.`},
-  {id:'hotels',name:'Hotel Scout',desc:'All Tiers · Picks · Locations',icon:'🏨',col:'rgba(16,185,129,.1)',bc:'rgba(16,185,129,.22)',claude:true,
-   p:d=>`You are an expert hotel research agent for ${d}. Profile: ${PROFILE}. ${pCtx()}
-Cover ALL FOUR accommodation tiers with nightly USD rates:
-🛏 Youth Hostel / Dorm ($8-30/night) — best hostels, social vibe, dorm vs private options
-🏠 Budget Hotel 1-2★ ($30-70/night) — best value picks, clean & safe locations
-🏨 Mid-Range 3★ ($70-200/night) — top picks with notes, neighborhoods, booking tips
-🌟 Luxury 4-5★ ($200-600+/night) — standout hotels, signature features, best deals
-Also: best neighborhoods, what's near each tier, booking platforms, seasonal rates.
-Use **bold** headings. Under 380 words.`},
-  {id:'food',name:'Food & Dining',desc:'Cuisine · Restaurants · Scene',icon:'🍜',col:'rgba(245,158,11,.1)',bc:'rgba(245,158,11,.25)',claude:true,
-   p:d=>`Expert food guide for ${d}. Profile: ${PROFILE}. ${pCtx()} Cover: top 5 must-try dishes (with description & avg cost), best food neighborhoods & markets, 5 restaurant picks across all price levels, dining customs & etiquette, vegetarian/vegan/halal availability, best food tours or cooking classes, late-night eats. **Bold** headers. Under 320 words.`},
-  {id:'tourist',name:'Attractions',desc:'Landmarks · Hidden Gems · Tips',icon:'🗺️',col:'rgba(139,92,246,.1)',bc:'rgba(139,92,246,.22)',claude:true,
-   p:d=>`Expert tourist guide for ${d}. Profile: ${PROFILE}. ${pCtx()} Cover: top 6 must-see attractions (why iconic, entry fee, best time), 3 hidden gems locals love, free vs paid highlights, best day trips within 90 min, photography spots, skip-the-queue tips, accessibility notes. **Bold** headers. Under 320 words.`},
+  {id:'flights',name:'Flight Finder',desc:'All Airlines · All Stops · All Fares',icon:'✈️',col:'rgba(59,130,246,.12)',bc:'rgba(59,130,246,.25)',claude:true,
+   p:d=>`You are a COMPREHENSIVE flight market aggregator — behave like Skyscanner + Google Flights + Kayak combined. Route: ${FROM||'major hub'} → ${d}. Profile: ${PROFILE}. ${pCtx()}
+
+CRITICAL: Do NOT summarize. ENUMERATE every realistic option. Travelers need the full market view, not 2-3 picks. Use realistic 2025-2026 fare ranges in USD per person round-trip.
+
+**✈️ NONSTOP FLIGHTS**
+List EVERY airline operating nonstop ${FROM||'origin'} → ${d}. If none exist, state so and skip. Format as a table:
+| Airline | Duration | Frequency | Economy (low→peak) | Business |
+Include flag carriers, full-service, and any LCCs on this route. Aim for 4-8 rows if the route supports it.
+
+**🛬 1-STOP CONNECTING FLIGHTS**
+List 8-12 realistic connecting options via major hubs (Doha-DOH, Istanbul-IST, Dubai-DXB, Abu Dhabi-AUH, Frankfurt-FRA, Amsterdam-AMS, Paris-CDG, London-LHR, Singapore-SIN, Bangkok-BKK, Addis Ababa-ADD, etc.). Format:
+| Airline | Via | Total Time | Layover | Economy | Business |
+Cover Gulf carriers, European carriers, Asian carriers, African carriers — whichever realistically serve this route.
+
+**🔄 2-STOP / ULTRA-BUDGET ROUTES**
+4-6 cheapest multi-stop options including LCC combinations (self-transfer, mixed carriers, Kiwi.com style). Show: carriers · total time · fare · warning if self-transfer risk.
+
+**💺 CABIN CLASS FARE MATRIX** (cheapest available across all carriers)
+| Class | Low Season | Shoulder | Peak Season |
+| Economy | $X | $Y | $Z |
+| Premium Economy | $X | $Y | $Z |
+| Business | $X | $Y | $Z |
+| First (if available) | $X | $Y | $Z |
+
+**🏆 SMART PICKS**
+- 💰 **Absolute Cheapest:** [airline + routing + $fare]
+- ⚡ **Fastest:** [airline + time]
+- 💎 **Best Value (price vs comfort):** [airline]
+- 🛋️ **Most Comfortable Economy:** [airline + why]
+- 🧳 **Best Baggage Allowance:** [airline + allowance]
+- ⭐ **Best On-Time Performance:** [airline]
+
+**📅 BOOKING STRATEGY**
+- Cheapest months to fly · months to AVOID · ideal booking window (X weeks out)
+- Cheapest weekday to depart · cheapest weekday to return
+- Price drop alerts — best tools (Hopper, Google Flights tracking, Kayak alerts)
+
+**🎒 BAGGAGE COMPARISON** (economy class)
+Quick 1-line per major carrier: cabin + checked allowance.
+
+**🔗 BOOKING PLATFORMS FOR THIS ROUTE**
+Which aggregator typically shows lowest fare for this route (Skyscanner / Google Flights / Kayak / Kiwi / direct airline) + one-sentence why.
+
+**⚠️ TRANSIT VISA WARNINGS** — only if applicable to common hubs on this route.
+
+Use **bold** headers and markdown tables as shown. Real airlines only. Be comprehensive — a traveler should see every viable option here.`},
+  {id:'hotels',name:'Hotel Scout',desc:'All Tiers · 20+ Picks · Every Neighborhood',icon:'🏨',col:'rgba(16,185,129,.1)',bc:'rgba(16,185,129,.22)',claude:true,
+   p:d=>`You are a COMPREHENSIVE hotel aggregator for ${d} — behave like Booking.com + Agoda + Hotels.com combined. Profile: ${PROFILE}. ${pCtx()}
+
+CRITICAL: Do NOT give 1-2 picks per tier. List 4-6 SPECIFIC named properties per tier with real names and realistic 2025-2026 USD rates.
+
+**🛏 HOSTELS & DORMS** ($8-30/night)
+List 4-5 real hostels. Format:
+| Name | Neighborhood | Dorm / Private | Rating | Vibe |
+Include social/party, chill/quiet, female-only, and coworking options if available.
+
+**🏠 BUDGET HOTELS 1-2★** ($30-70/night)
+List 4-5 real budget hotels / guesthouses / boutique cheapies. Format:
+| Name | Neighborhood | Price | Best for | Booking tip |
+
+**🏨 MID-RANGE 3-4★** ($70-200/night)
+List 5-6 real mid-range properties across different neighborhoods. Format:
+| Name | Neighborhood | Price | Standout feature | Metro/transport |
+
+**🌟 LUXURY & 5★** ($200-600+/night)
+List 4-6 real luxury hotels — include international chains AND standout local/boutique. Format:
+| Name | Neighborhood | Price from | Signature feature | Best booking channel |
+
+**🏝 APARTMENTS / AIRBNB / VILLAS**
+3-4 neighborhoods best for short-term rentals with typical 1BR nightly rate.
+
+**📍 NEIGHBORHOOD GUIDE** (where to stay by priority)
+- First-time visitor: [area + why]
+- Nightlife & food: [area]
+- Quiet/family: [area]
+- Budget base: [area]
+- Best views: [area]
+- Avoid: [area + reason]
+
+**💰 BOOKING PLATFORM STRATEGY**
+Which platform (Booking.com / Agoda / Hotels.com / Expedia / direct) gives best price for this city + why. Loyalty program worth joining.
+
+**📅 SEASONAL PRICING**
+Peak months (expect +X%) · shoulder (best value) · low season (cheapest).
+
+**🎁 INSIDER TIPS**
+3-4 booking hacks specific to this destination (late check-out norms, tipping, resort fees, city tax, etc.).
+
+Use **bold** headers and markdown tables as shown. Real properties only — if unsure of a name, omit rather than fabricate.`},
+  {id:'food',name:'Food & Dining',desc:'Cuisine · 15+ Restaurants · Full Scene',icon:'🍜',col:'rgba(245,158,11,.1)',bc:'rgba(245,158,11,.25)',claude:true,
+   p:d=>`Comprehensive food & dining guide for ${d} — behave like TheFork + TripAdvisor + local food blog combined. Profile: ${PROFILE}. ${pCtx()}
+
+**🍽 MUST-TRY DISHES** (8-10 items)
+Table: | Dish | Description | Avg Cost | Where to try it |
+
+**📍 BEST FOOD NEIGHBORHOODS & MARKETS**
+List 4-5 areas known for food, plus top 2-3 street food markets with opening hours.
+
+**🌟 RESTAURANTS BY PRICE TIER**
+- **Budget / Street ($5-15):** 4 named spots
+- **Mid-range ($15-40):** 5 named spots across cuisines
+- **Upscale ($40-80):** 3 named spots
+- **Fine dining / Michelin ($80+):** 2-3 named spots
+
+**🥗 DIETARY** — vegetarian, vegan, halal, kosher, gluten-free availability + 1-2 named spots each.
+
+**☕ CAFÉS & BRUNCH** — 3 named spots.
+
+**🌙 LATE-NIGHT EATS** — 2-3 spots open past midnight.
+
+**🍸 DRINKS & BARS** — 3 named bars (rooftop, local, cocktail) with price expectations.
+
+**🎓 FOOD EXPERIENCES**
+Food tours (operator + price), cooking classes (operator + price), market tours.
+
+**📋 DINING CUSTOMS** — tipping %, reservation norms, table-sharing, service charge rules, cash vs card.
+
+Use **bold** headers, tables where useful. Real restaurants only. Under 650 words.`},
+  {id:'tourist',name:'Attractions',desc:'Landmarks · Hidden Gems · Day Trips',icon:'🗺️',col:'rgba(139,92,246,.1)',bc:'rgba(139,92,246,.22)',claude:true,
+   p:d=>`Comprehensive attractions guide for ${d}. Profile: ${PROFILE}. ${pCtx()}
+
+**🏛 TOP LANDMARKS** (8-10)
+Table: | Attraction | Why iconic | Entry Fee | Best Time | Duration |
+
+**💎 HIDDEN GEMS** (5 local favorites tourists miss)
+
+**🆓 FREE vs 💰 PAID** — quick split list of what's worth paying for and what's great for free.
+
+**🚌 DAY TRIPS WITHIN 2 HOURS** (4-5 options) — destination · how to get there · time needed · cost.
+
+**📸 PHOTO SPOTS** (5 best) — with best time of day.
+
+**🎫 PASSES & TICKETS** — city pass worth buying? Which attractions need advance booking? Skip-the-line strategies.
+
+**♿ ACCESSIBILITY** — wheelchair-friendly notes, stroller tips.
+
+**👨‍👩‍👧 FAMILY / KIDS** — 3 attractions specifically great for kids.
+
+**🌃 AFTER DARK** — 3 things to do in the evening.
+
+**⚠️ AVOID / TOURIST TRAPS** — 2-3 overhyped spots + why.
+
+Use **bold** headers and tables. Under 600 words.`},
   {id:'transport',name:'Local Transport',desc:'Metro · Taxi · Rail · Apps',icon:'🚇',col:'rgba(6,182,212,.1)',bc:'rgba(6,182,212,.22)',claude:true,
    p:d=>`Expert transport agent for ${d}. Cover: airport → city best options (cost, time, each mode), city transport overview (metro/bus/tram), transit passes & cards worth buying, taxi/rideshare apps (local & international), inter-city rail/bus options, walking/cycling rating, common tourist scams, best navigation apps. **Bold** headers. Under 320 words.`},
   {id:'reviews',name:'Traveler Reviews',desc:'Sentiment · Ratings · Insights',icon:'⭐',col:'rgba(244,63,94,.08)',bc:'rgba(244,63,94,.2)',claude:true,
@@ -1078,8 +1325,17 @@ Use **bold** headings. Under 380 words.`},
    p:d=>`Mobile connectivity guide for ${d}. ${FROM?`Traveler from ${FROM}.`:''} **eSIM Before Travel** (Airalo/Nomad/Holafly/Ubigi - cost 7/14/30 days). **Airport SIM on Arrival** (carrier kiosk, cost). **Local SIM in City** (best carrier, tourist plan costs, ID needed). **Coverage** (4G/5G). **Other Options** (pocket WiFi, hotel WiFi). **Best Recommendation** for ${PROFILE}. USD costs. **Bold** headers. Under 360 words.`},
   {id:'links',name:'Book & Contact',desc:'Airlines - Hotels - Agencies - Visa',icon:'🔗',col:'rgba(59,130,246,.1)',bc:'rgba(59,130,246,.25)',claude:true,
    p:d=>`Return ONLY valid JSON, no markdown. Trip: ${FROM||'UAE'} to ${d}. Profile: ${PROFILE}.
-{"airlines":[{"name":"str","hub":"str","route":"str","booking":"url","phone":"str","notes":"str"}],"hotels":[{"name":"str","tier":"Budget|Mid|Luxury","area":"str","booking":"url","direct":"url","price_usd_night":"$X","notes":"str"}],"travel_agencies":[{"name":"str","city":"str","speciality":"str","website":"url","phone":"str","notes":"str"}],"visa_contacts":[{"name":"str","city":"str","address":"str","phone":"str","email":"str","website":"url","hours":"str","processing_days":"str"}],"booking_tips":["tip1","tip2","tip3"]}
-4 airlines, 5 hotels (mix Budget/Mid/Luxury), 3 agencies in ${FROM||'UAE'}, 2 visa contacts. Real names and websites only.`},
+{"airlines":[{"name":"str","category":"Nonstop|1-Stop|Budget|Premium","hub":"str","route":"str","fare_from_usd":"$X","booking":"url","phone":"str","notes":"str"}],"hotels":[{"name":"str","tier":"Hostel|Budget|Mid|Luxury","area":"str","booking":"url","direct":"url","price_usd_night":"$X","notes":"str"}],"travel_agencies":[{"name":"str","city":"str","speciality":"str","website":"url","phone":"str","notes":"str"}],"visa_contacts":[{"name":"str","city":"str","address":"str","phone":"str","email":"str","website":"url","hours":"str","processing_days":"str"}],"aggregators":[{"name":"str","website":"url","best_for":"str"}],"booking_tips":["tip1","tip2","tip3","tip4","tip5"]}
+
+REQUIRED volume:
+- **12 airlines minimum** — mix of categories: 3-4 Nonstop carriers, 4-5 1-Stop carriers via hubs, 2-3 Budget/LCC, 2-3 Premium. Include real booking URLs (airline's own site).
+- **10 hotels** — 2 Hostel, 3 Budget, 3 Mid, 2 Luxury — with real Booking.com URL and direct hotel URL.
+- **4 travel agencies** based in ${FROM||'UAE'}.
+- **2 visa contacts** (embassy/VFS).
+- **5 aggregators** — Skyscanner, Google Flights, Kayak, Booking.com, Agoda (or equivalents relevant to this route) with the "best_for" note.
+- **5 booking tips** specific to this route.
+
+Real names and real URLs only. No fabricated data.`},
   {id:'sustain',name:'Eco & Sustainability',desc:'Carbon · Green Score · Ethics',icon:'🌱',col:'rgba(16,185,129,.1)',bc:'rgba(16,185,129,.22)',claude:true,
    p:d=>`Expert eco-travel agent for ${d}. ${FROM?`Departure: ${FROM}.`:''} Cover: estimated carbon footprint from ${FROM||'Dubai & London'} (kg CO₂ economy vs business class), carbon offset options, eco-certified hotels, green activities, environmental concerns, sustainable local transport, ethical tourism tips, wildlife & cultural protection, community support tips. Overall eco-friendliness rating /10. **Bold** headers. Under 320 words.`},
 ];
@@ -1140,32 +1396,60 @@ function updateStatus(){
    WEATHER AGENT
 ═══════════════════════════════════ */
 async function wxAgent(){
-  upCard('weather',{status:'running',progress:15});
+  upCard('weather',{status:'running',progress:10});
   try{
-    const g=await(await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(DEST)}&count=1&format=json`)).json();
-    const loc=g.results?.[0];if(!loc)throw new Error('Location not found');
+    if(!DEST||!DEST.trim())throw new Error('No destination selected yet.');
+    // Try geocoding with progressive fallbacks
+    var tries=[DEST, DEST.split(',')[0].trim(), DEST.split(/[–-]/)[0].trim(), DEST.replace(/\s+(city|town)$/i,'').trim()].filter(function(v,i,a){return v&&a.indexOf(v)===i;});
+    var loc=null,lastErr='';
+    for(var i=0;i<tries.length&&!loc;i++){
+      try{
+        var gr=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(tries[i])+'&count=1&language=en&format=json');
+        if(!gr.ok){lastErr='Geocoding HTTP '+gr.status;continue;}
+        var g=await gr.json();
+        if(g.results&&g.results[0]){loc=g.results[0];break;}
+        lastErr='No match for "'+tries[i]+'"';
+      }catch(ge){lastErr=ge.message;}
+    }
+    if(!loc)throw new Error('Could not locate "'+DEST+'" on map ('+lastErr+')');
     upCard('weather',{progress:50});
-    const wx=await(await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum&current_weather=true&timezone=auto&forecast_days=7`)).json();
-    const cur=wx.current_weather,dl=wx.daily;
-    const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    const wkHTML=dl.time.map((t,i)=>{
-      const d=new Date(t),mx=Math.round(dl.temperature_2m_max[i]),mn=Math.round(dl.temperature_2m_min[i]);
-      const bh=Math.max(8,Math.round((mx+15)/65*34));
-      return`<div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">
-        <div style="font-size:10px;font-weight:700;color:var(--ts)">${WD[d.getDay()]}</div>
-        <div style="font-size:14px">${wxIco(dl.weathercode[i])}</div>
-        <div style="font-size:11px;color:var(--cyan);font-weight:700">${mx}°</div>
-        <div style="width:4px;height:${bh}px;background:linear-gradient(to top,#3b82f6,#06b6d4);border-radius:2px"></div>
-        <div style="font-size:10px;color:var(--tm)">${mn}°</div>
-      </div>`;}).join('');
-    const html=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-      <div style="font-size:38px">${wxIco(cur?.weathercode||0)}</div>
-      <div><div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800">${Math.round(cur?.temperature||0)}°C</div>
-      <div style="font-size:12px;color:var(--ts)">${wxDesc(cur?.weathercode||0)} · ${loc.name}, ${loc.country_code?.toUpperCase()}</div></div></div>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">${wkHTML}</div>
-      <div style="font-size:10px;color:var(--tm);margin-top:8px">Live data · Open-Meteo API · No API key needed</div>`;
+    var wxURL='https://api.open-meteo.com/v1/forecast?latitude='+loc.latitude+'&longitude='+loc.longitude+
+      '&current=temperature_2m,weather_code'+
+      '&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_sum'+
+      '&timezone=auto&forecast_days=7';
+    var wr=await fetch(wxURL);
+    if(!wr.ok)throw new Error('Weather API HTTP '+wr.status);
+    var wx=await wr.json();
+    if(wx.error)throw new Error(wx.reason||'Weather API error');
+    var cur=wx.current||{},dl=wx.daily||{};
+    if(!dl.time||!dl.time.length)throw new Error('No forecast data returned');
+    var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var curCode=cur.weather_code||0,curTemp=cur.temperature_2m;
+    var wkHTML=dl.time.map(function(t,i){
+      var d=new Date(t),mx=Math.round(dl.temperature_2m_max[i]),mn=Math.round(dl.temperature_2m_min[i]);
+      var rain=dl.precipitation_sum&&dl.precipitation_sum[i]?Math.round(dl.precipitation_sum[i]):0;
+      var bh=Math.max(8,Math.round((mx+15)/65*34));
+      return '<div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px">'+
+        '<div style="font-size:10px;font-weight:700;color:var(--ts)">'+WD[d.getDay()]+'</div>'+
+        '<div style="font-size:14px">'+wxIco(dl.weather_code[i])+'</div>'+
+        '<div style="font-size:11px;color:var(--cyan);font-weight:700">'+mx+'°</div>'+
+        '<div style="width:4px;height:'+bh+'px;background:linear-gradient(to top,#3b82f6,#06b6d4);border-radius:2px"></div>'+
+        '<div style="font-size:10px;color:var(--tm)">'+mn+'°</div>'+
+        (rain?'<div style="font-size:9px;color:#60a5fa">💧'+rain+'mm</div>':'')+
+        '</div>';
+    }).join('');
+    var curT=(curTemp!=null)?Math.round(curTemp)+'°C':'—';
+    var html='<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">'+
+      '<div style="font-size:38px">'+wxIco(curCode)+'</div>'+
+      '<div><div style="font-family:\'Syne\',sans-serif;font-size:26px;font-weight:800">'+curT+'</div>'+
+      '<div style="font-size:12px;color:var(--ts)">'+wxDesc(curCode)+' · '+loc.name+', '+(loc.country_code||'').toUpperCase()+'</div></div></div>'+
+      '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">'+wkHTML+'</div>'+
+      '<div style="font-size:10px;color:var(--tm);margin-top:8px">Live · Open-Meteo · '+loc.latitude.toFixed(2)+'°, '+loc.longitude.toFixed(2)+'°</div>';
     upCard('weather',{status:'done',content:html,progress:100});
-  }catch(e){upCard('weather',{status:'error',content:e.message,progress:0});}
+  }catch(e){
+    console.warn('[weather]',e);
+    upCard('weather',{status:'error',content:'Weather unavailable — '+(e.message||'network error')+'. Try a different destination name or check your connection.',progress:0});
+  }
 }
 function wxIco(c){if(c===0)return'☀️';if(c<=2)return'⛅';if(c<=3)return'☁️';if(c<=49)return'🌫️';if(c<=67)return'🌧️';if(c<=77)return'❄️';if(c<=82)return'🌦️';return'⛈️';}
 function wxDesc(c){if(c===0)return'Clear sky';if(c<=2)return'Partly cloudy';if(c<=3)return'Overcast';if(c<=49)return'Foggy';if(c<=67)return'Rain';if(c<=77)return'Snow';return'Thunderstorm';}
@@ -1206,7 +1490,8 @@ async function claudeAgent(a){
   upCard(a.id,{status:'running',progress:15});
   try{
     const tick=setInterval(()=>{const cur=(AS[a.id]||{}).progress||15;if(cur<72)upCard(a.id,{progress:cur+Math.random()*9});},800);
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:(a.id==='links'?2500:1000),messages:[{role:'user',content:a.p(DEST)}]})});
+    const MT={flights:3500,hotels:2800,food:2000,tourist:2200,transport:1800,reviews:1500,visa:1600,agency:1800,sim:1500,links:4000,sustain:1400};
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:(MT[a.id]||1500),messages:[{role:'user',content:a.p(DEST)}]})});
     clearInterval(tick);
     if(!r.ok){
       const e=await r.json();
@@ -1226,12 +1511,27 @@ async function claudeAgent(a){
   }
 }
 function md2html(t){
+  // Parse markdown tables FIRST (before other replacements touch pipes/newlines)
+  t=t.replace(/((?:^\|[^\n]+\|\s*\n){2,})/gm,function(block){
+    var lines=block.trim().split(/\n/).filter(function(l){return l.trim().startsWith('|');});
+    if(lines.length<2)return block;
+    var cells=function(l){return l.replace(/^\||\|$/g,'').split('|').map(function(c){return c.trim();});};
+    var header=cells(lines[0]);
+    // Detect & skip separator row (---|---)
+    var bodyStart=1;
+    if(lines[1]&&/^\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?\s*$/.test(lines[1]))bodyStart=2;
+    var thead='<thead><tr>'+header.map(function(h){return'<th>'+h+'</th>';}).join('')+'</tr></thead>';
+    var tbody='<tbody>'+lines.slice(bodyStart).map(function(l){var c=cells(l);return'<tr>'+c.map(function(x){return'<td>'+x+'</td>';}).join('')+'</tr>';}).join('')+'</tbody>';
+    return'<div class="md-tbl-wrap"><table class="md-tbl">'+thead+tbody+'</table></div>';
+  });
   return t
     .replace(/^#{1,3}\s+(.+)$/gm,'<h4>$1</h4>')
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
     .replace(/\*(.+?)\*/g,'<em>$1</em>')
     .replace(/^[-•]\s+(.+)$/gm,'<li>$1</li>')
     .replace(/((<li>[^<]*<\/li>\n?)+)/g,'<ul style="padding-left:14px;margin:4px 0">$1</ul>')
+    .replace(/(<\/table><\/div>)\s*<br>/g,'$1')
+    .replace(/<br>\s*(<div class="md-tbl-wrap">)/g,'$1')
     .replace(/\n{2,}/g,'<br><br>').replace(/\n/g,'<br>');
 }
 
@@ -1239,6 +1539,8 @@ function md2html(t){
    MAIN ORCHESTRATION
 ═══════════════════════════════════ */
 async function runAll(){
+  // Keep budget profile selector in lockstep with the current traveler profile
+  BDG_P=profileToBdg(PROFILE);
   // Auto-add whatever is typed in the destination field (user may not have pressed Enter)
   const typedDest=document.getElementById('destInput').value.trim();
   if(typedDest)addDest(typedDest);
@@ -1349,10 +1651,35 @@ async function buildItinerary(){
   const f=document.getElementById('dFrom').value,t=document.getElementById('dTo').value;
   let nights=5,sd=null;
   if(f&&t){nights=Math.max(1,Math.round((new Date(t)-new Date(f))/864e5));sd=new Date(f);}
-  const ctx=AGENTS.filter(a=>AS[a.id]?.status==='done').map(a=>`[${a.name}]:${(AS[a.id]?.content||'').replace(/<[^>]+>/g,'').slice(0,260)}`).join('\n');
-  const prompt=`Build a ${nights}-day itinerary for ${PROFILE} traveler traveling from ${FROM} to ${DEST}. Use this research:\n${ctx}\n\nOutput format EXACTLY (pipe-delimited, no extra text):\nDAY 1|Title\nMORNING|activities with place names\nAFTERNOON|activities\nEVENING|dinner and evening activities\nDAY 2|Title\n...continue for all ${nights} days.`;
+  const ctx=AGENTS.filter(a=>AS[a.id]?.status==='done').map(a=>`[${a.name}]:${(AS[a.id]?.content||'').replace(/<[^>]+>/g,'').slice(0,280)}`).join('\n');
+  const prompt=`Build a DETAILED ${nights}-day itinerary for a ${PROFILE} traveler from ${FROM} to ${DEST}. Use this research:
+${ctx}
+
+CRITICAL: Output in EXACTLY this pipe-delimited format. No markdown, no extra text. One item per line.
+
+DAY 1|Arrival & Orientation
+BREAKFAST|Named café/spot · approx $X
+MORNING|Time window (e.g., 09:00–12:00) · main activity with specific place name · entry fee $X · why it matters · one insider tip
+LUNCH|Named restaurant · approx $X · what to order
+AFTERNOON|Time window · activity with place name · cost · tip
+EVENING|Time window · dinner spot · approx $X · evening plan
+NIGHT|Optional late activity or rest
+TRANSPORT|How to move between today's stops (metro/taxi/walk) · approx total transport cost
+DAYCOST|~$X per person (excluding accommodation)
+TIP|One specific pro tip for this day
+DAY 2|Next day's title
+...continue every section for all ${nights} days.
+
+Rules:
+- Use REAL named places from the research context (restaurants, landmarks, neighborhoods).
+- Give realistic USD costs.
+- Morning must start with a specific time window; same for afternoon and evening.
+- Keep each line under 220 characters.
+- Build a logical flow — don't repeat the same neighborhood twice in a row unless it makes sense.
+- Day 1 = arrival-friendly (lighter), last day = departure-aware.
+- Mix iconic sights with hidden gems across the trip.`;
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:2500,messages:[{role:'user',content:prompt}]})});
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:hdrs(),body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:4000,messages:[{role:'user',content:prompt}]})});
     const d=await r.json();
     drawItinerary((d.content||[]).map(b=>b.text||'').join(''),nights,sd);
   }catch(e){document.getElementById('itinContent').innerHTML=`<div class="empty"><div class="empty-ico">⚠️</div><div class="empty-title">Itinerary error</div><div class="empty-sub">${e.message}</div></div>`;}
@@ -1362,32 +1689,43 @@ function drawItinerary(raw,nights,sd){
   const MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean);
   const blocks=[];let cur=null;
+  const setField=(key,val)=>{if(cur)cur[key]=val;};
   lines.forEach(l=>{
-    if(/^DAY\s+\d+\|/.test(l)){const p=l.split('|');cur={n:parseInt(p[0].replace(/\D/g,'')),title:p[1]||'Exploration',am:'',pm:'',eve:''};blocks.push(cur);}
-    else if(cur&&l.startsWith('MORNING|'))cur.am=l.slice(8);
-    else if(cur&&l.startsWith('AFTERNOON|'))cur.pm=l.slice(10);
-    else if(cur&&l.startsWith('EVENING|'))cur.eve=l.slice(8);
+    if(/^DAY\s+\d+\|/i.test(l)){const p=l.split('|');cur={n:parseInt(p[0].replace(/\D/g,'')),title:(p[1]||'Exploration').trim(),brk:'',am:'',lun:'',pm:'',eve:'',ngt:'',trn:'',cost:'',tip:''};blocks.push(cur);}
+    else if(/^BREAKFAST\|/i.test(l))setField('brk',l.split('|').slice(1).join('|').trim());
+    else if(/^MORNING\|/i.test(l))setField('am',l.split('|').slice(1).join('|').trim());
+    else if(/^LUNCH\|/i.test(l))setField('lun',l.split('|').slice(1).join('|').trim());
+    else if(/^AFTERNOON\|/i.test(l))setField('pm',l.split('|').slice(1).join('|').trim());
+    else if(/^EVENING\|/i.test(l))setField('eve',l.split('|').slice(1).join('|').trim());
+    else if(/^NIGHT\|/i.test(l))setField('ngt',l.split('|').slice(1).join('|').trim());
+    else if(/^TRANSPORT\|/i.test(l))setField('trn',l.split('|').slice(1).join('|').trim());
+    else if(/^DAYCOST\|/i.test(l))setField('cost',l.split('|').slice(1).join('|').trim());
+    else if(/^TIP\|/i.test(l))setField('tip',l.split('|').slice(1).join('|').trim());
   });
-  const txt=`🌍 ${nights}-Day Trip: ${FROM} → ${DEST}\n\n`+blocks.map(b=>`📅 Day ${b.n}: ${b.title}\n🌅 ${b.am}\n☀️ ${b.pm}\n🌙 ${b.eve}`).join('\n\n')+'\n\nPlanned with TravelMind AI ✈️';
+  _ITIN={blocks:blocks,nights:nights,sd:sd};
+  const txt=`🌍 ${nights}-Day Trip: ${FROM} → ${DEST}\n\n`+blocks.map(b=>`📅 Day ${b.n}: ${b.title}\n☕ Breakfast: ${b.brk}\n🌅 Morning: ${b.am}\n🍽 Lunch: ${b.lun}\n☀️ Afternoon: ${b.pm}\n🌙 Evening: ${b.eve}${b.ngt?'\n🌃 Night: '+b.ngt:''}${b.trn?'\n🚇 Transport: '+b.trn:''}${b.cost?'\n💰 Est. cost: '+b.cost:''}${b.tip?'\n💡 Tip: '+b.tip:''}`).join('\n\n')+'\n\nPlanned with TravelMind AI ✈️';
   const enc=encodeURIComponent(txt);
   const surl=encodeURIComponent(location.href.split('#')[0]+'#dest='+encodeURIComponent(DEST));
+  const row=(ico,col,lbl,v)=>v?`<div class="time-block"><div class="tb-time" style="color:${col}">${ico} ${lbl}</div><div class="tb-content">${md2html(v)}</div></div>`:'';
   const days=blocks.map(b=>{
     let ds='';if(sd){const dd=new Date(sd);dd.setDate(dd.getDate()+(b.n-1));ds=`${WD[dd.getDay()]}, ${dd.getDate()} ${MO[dd.getMonth()]}`;}
-    return`<div class="day-card"><div class="day-hdr"><div class="day-num">${b.n}</div><div><div class="day-title">${b.title}</div>${ds?`<div class="day-date">${ds}</div>`:''}</div></div><div class="day-body"><div class="time-block"><div class="tb-time" style="color:#f59e0b">🌅 Morning</div><div class="tb-content">${md2html(b.am||'Flexible start')}</div></div><div class="time-block"><div class="tb-time" style="color:#06b6d4">☀️ Afternoon</div><div class="tb-content">${md2html(b.pm||'Explore')}</div></div><div class="time-block"><div class="tb-time" style="color:#8b5cf6">🌙 Evening</div><div class="tb-content">${md2html(b.eve||'Dinner & relax')}</div></div></div></div>`;
+    const footer=(b.cost||b.tip||b.trn)?`<div style="border-top:1px solid var(--border);padding:10px 14px;display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--ts);background:rgba(255,255,255,.015)">${b.trn?`<span>🚇 ${b.trn}</span>`:''}${b.cost?`<span style="color:#34D399;font-weight:600">💰 ${b.cost}</span>`:''}${b.tip?`<span style="color:#fbbf24">💡 ${b.tip}</span>`:''}</div>`:'';
+    return`<div class="day-card"><div class="day-hdr"><div class="day-num">${b.n}</div><div><div class="day-title">${b.title}</div>${ds?`<div class="day-date">${ds}</div>`:''}</div></div><div class="day-body">${row('☕','#84cc16','Breakfast',b.brk)}${row('🌅','#f59e0b','Morning',b.am||'Flexible start')}${row('🍽','#ec4899','Lunch',b.lun)}${row('☀️','#06b6d4','Afternoon',b.pm||'Explore')}${row('🌙','#8b5cf6','Evening',b.eve||'Dinner & relax')}${row('🌃','#6366f1','Night',b.ngt)}</div>${footer}</div>`;
   }).join('');
   document.getElementById('itinContent').innerHTML=`
     <div class="itin-hdr">
       <div><div class="itin-title">${nights}-Day Itinerary · ${DEST}</div><div class="itin-meta">${PROFILE.charAt(0).toUpperCase()+PROFILE.slice(1)} traveler · ${FROM} → ${DEST} · AI-generated</div></div>
       <div class="share-btns">
-        <button class="shr sh1" onclick="window.print()">🖨 Print PDF</button>
+        <button class="shr sh1" onclick="exportFullReportPDF()" style="background:linear-gradient(135deg,rgba(29,78,216,.25),rgba(8,145,178,.25));border:1px solid rgba(59,130,246,.5);color:#93c5fd">📄 Full Report PDF</button>
         <button class="shr sh2" onclick="window.open('https://api.whatsapp.com/send?text=${enc}','_blank')">WhatsApp</button>
         <button class="shr sh3" onclick="window.open('https://t.me/share/url?url=${surl}&text=${encodeURIComponent(nights+'-day trip to '+DEST)}','_blank')">Telegram</button>
         <button class="shr sh4" onclick="navigator.clipboard?.writeText(decodeURIComponent('${surl}')).then(()=>alert('Link copied!'))">🔗 Copy Link</button>
-        <button class="shr sh5" onclick="dlTxt('${enc}')">⬇ Download</button>
+        <button class="shr sh5" onclick="dlTxt('${enc}')">⬇ Text</button>
       </div>
     </div>
     <div class="itin-days">${days}</div>`;
 }
+var _ITIN=null;
 function dlTxt(enc){const a=document.createElement('a');a.href='data:text/plain;charset=utf-8,'+enc;a.download=`TravelMind-${DEST}.txt`;a.click();}
 
 /* ═══════════════════════════════════
@@ -1611,14 +1949,154 @@ function renderLinksPanel(){
   }catch(e){el.innerHTML='<div style="padding:18px;background:var(--card);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--ts)"><b style="color:var(--rose)">JSON parse failed — regenerate plan to refresh</b><br><br>'+s.content.replace(/<[^>]+>/g,'').slice(0,500)+'</div>';return;}
   function bb(url,lbl){if(!url)return'';return'<a href="https://'+url.replace(/^https?:\/\//,'') +'" target="_blank" style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:6px;color:#93c5fd;font-size:11px;font-weight:600;text-decoration:none">'+lbl+'</a>';}
   function card(t,ico,col,rows){return'<div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:'+col+';margin-bottom:12px">'+ico+' '+t+'</div>'+rows+'</div>';}
-  var aH=(d.airlines||[]).map(function(a){return'<div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)"><div style="font-size:20px">✈️</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--tp);margin-bottom:2px">'+(a.name||'')+'</div><div style="font-size:11px;color:var(--ts);margin-bottom:4px">'+(a.route||'')+(a.notes?' · '+a.notes:'')+'</div><div style="display:flex;gap:6px;align-items:center">'+bb(a.booking,'Book Flights')+(a.phone?'<span style="font-size:11px;color:var(--tm)">'+a.phone+'</span>':'')+'</div></div></div>';}).join('');
-  var tc={'Budget':'#60A5FA','Mid':'#34D399','Luxury':'#F59E0B'};
+  // Group airlines by category for Skyscanner-like presentation
+  var catOrder=['Nonstop','1-Stop','Budget','Premium'];
+  var catCol={'Nonstop':'#34D399','1-Stop':'#60A5FA','Budget':'#FBBF24','Premium':'#C084FC'};
+  var byCat={};(d.airlines||[]).forEach(function(a){var c=a.category||'1-Stop';(byCat[c]=byCat[c]||[]).push(a);});
+  var aH=catOrder.filter(function(c){return byCat[c]&&byCat[c].length;}).map(function(c){
+    var rows=byCat[c].map(function(a){return'<div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)"><div style="font-size:20px">✈️</div><div style="flex:1"><div style="display:flex;gap:6px;align-items:center;margin-bottom:2px;flex-wrap:wrap"><span style="font-size:13px;font-weight:700;color:var(--tp)">'+(a.name||'')+'</span>'+(a.fare_from_usd?'<span style="font-size:10px;padding:1px 7px;border-radius:99px;background:rgba(16,185,129,.12);color:#34D399;font-weight:600">from '+a.fare_from_usd+'</span>':'')+'</div><div style="font-size:11px;color:var(--ts);margin-bottom:4px">'+(a.route||'')+(a.hub?' · via '+a.hub:'')+(a.notes?' · '+a.notes:'')+'</div><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+bb(a.booking,'Book Direct')+(a.phone?'<span style="font-size:11px;color:var(--tm)">'+a.phone+'</span>':'')+'</div></div></div>';}).join('');
+    return'<div style="margin-bottom:6px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:'+(catCol[c]||'#60A5FA')+';padding:8px 0 4px;border-top:1px solid var(--border)">'+c+' Carriers · '+byCat[c].length+'</div>'+rows+'</div>';
+  }).join('');
+  var tc={'Hostel':'#C084FC','Budget':'#60A5FA','Mid':'#34D399','Luxury':'#F59E0B'};
   var hH=(d.hotels||[]).map(function(h){return'<div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)"><div style="font-size:20px">🏨</div><div style="flex:1"><div style="display:flex;gap:6px;align-items:center;margin-bottom:2px"><span style="font-size:13px;font-weight:700;color:var(--tp)">'+(h.name||'')+'</span><span style="font-size:10px;padding:1px 7px;border-radius:99px;border:1px solid '+(tc[h.tier]||'var(--border)')+';color:'+(tc[h.tier]||'var(--ts)')+';">'+(h.tier||'')+'</span></div><div style="font-size:11px;color:var(--ts);margin-bottom:4px">'+(h.area||'')+(h.price_usd_night?' · '+h.price_usd_night:'')+(h.notes?' · '+h.notes:'')+'</div><div style="display:flex;gap:6px">'+bb(h.direct,'Direct Book')+bb(h.booking,'Booking.com')+'</div></div></div>';}).join('');
   var agH=(d.travel_agencies||[]).map(function(a){return'<div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)"><div style="font-size:20px">🏢</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--tp);margin-bottom:2px">'+(a.name||'')+' <span style="font-size:10px;color:var(--tm)">'+(a.city||'')+'</span></div><div style="font-size:11px;color:var(--ts);margin-bottom:4px">'+(a.speciality||'')+(a.notes?' · '+a.notes:'')+'</div><div style="display:flex;gap:6px;align-items:center">'+bb(a.website,'Visit')+(a.phone?'<span style="font-size:11px;color:var(--tm)">'+a.phone+'</span>':'')+'</div></div></div>';}).join('');
   var vH=(d.visa_contacts||[]).map(function(v){return'<div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:12px;margin-bottom:8px"><div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:5px">📋 '+(v.name||'')+'</div><div style="font-size:11px;color:var(--ts);line-height:1.9">'+(v.address?'📍 '+v.address+'<br>':'')+(v.phone?'📞 '+v.phone+'<br>':'')+(v.email?'✉️ <a href="mailto:'+v.email+'" style="color:var(--cyan)">'+v.email+'</a><br>':'')+(v.hours?'🕐 '+v.hours+'<br>':'')+(v.processing_days?'⏱ '+v.processing_days+'<br>':'')+bb(v.website,'Apply for Visa')+'</div></div>';}).join('');
+  var agrH=(d.aggregators||[]).map(function(g){return'<div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)"><div style="font-size:20px">🔍</div><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--tp);margin-bottom:2px">'+(g.name||'')+'</div><div style="font-size:11px;color:var(--ts);margin-bottom:4px">'+(g.best_for||'')+'</div>'+bb(g.website,'Search')+'</div></div>';}).join('');
   var tH=(d.booking_tips||[]).map(function(t){return'<div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--ts)"><span>💡</span><span>'+t+'</span></div>';}).join('');
-  el.innerHTML=card('Airlines','✈️','#60A5FA',aH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Hotels','🏨','#34D399',hH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Travel Agencies','🏢','#F59E0B',agH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Visa Contacts','📋','#F43F5E',vH||'<div style="color:var(--tm);font-size:12px">No data</div>')+(tH?card('Booking Tips','💡','#8B5CF6',tH):'')+
+  el.innerHTML=card('Airlines · By Route Type','✈️','#60A5FA',aH||'<div style="color:var(--tm);font-size:12px">No data</div>')+(agrH?card('Flight & Hotel Aggregators','🔍','#06B6D4',agrH):'')+card('Hotels','🏨','#34D399',hH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Travel Agencies','🏢','#F59E0B',agH||'<div style="color:var(--tm);font-size:12px">No data</div>')+card('Visa Contacts','📋','#F43F5E',vH||'<div style="color:var(--tm);font-size:12px">No data</div>')+(tH?card('Booking Tips','💡','#8B5CF6',tH):'')+
   '<div style="font-size:11px;color:var(--tm);text-align:center;padding:8px">Verify all details directly with providers</div>';
+}
+
+function exportFullReportPDF(){
+  if(!DEST){alert('Generate a plan first.');return;}
+  var nights=(_BDG&&_BDG.nights)||(_ITIN&&_ITIN.nights)||7;
+  var stripHTML=function(s){return(s||'').replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<style[\s\S]*?<\/style>/gi,'');};
+  var agentSection=function(a){
+    var s=AS[a.id];if(!s||s.status!=='done'||!s.content||a.id==='links')return '';
+    var html=stripHTML(s.content);
+    return '<section class="rp-sec"><h2>'+a.icon+' '+a.name+'</h2><div class="rp-body">'+html+'</div></section>';
+  };
+  var agentsHTML=AGENTS.map(agentSection).join('');
+
+  // Itinerary section
+  var itinHTML='';
+  if(_ITIN&&_ITIN.blocks&&_ITIN.blocks.length){
+    var WD=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var sd=_ITIN.sd;
+    itinHTML='<section class="rp-sec rp-itin"><h2>📅 '+_ITIN.blocks.length+'-Day Itinerary</h2>'+_ITIN.blocks.map(function(b){
+      var ds='';if(sd){var dd=new Date(sd);dd.setDate(dd.getDate()+(b.n-1));ds=WD[dd.getDay()]+', '+dd.getDate()+' '+MO[dd.getMonth()];}
+      var row=function(ico,lbl,v){return v?'<tr><td class="rp-itim">'+ico+' '+lbl+'</td><td>'+v+'</td></tr>':'';};
+      return '<div class="rp-day"><div class="rp-day-hdr"><span class="rp-day-num">Day '+b.n+'</span><span class="rp-day-ttl">'+b.title+'</span>'+(ds?'<span class="rp-day-date">'+ds+'</span>':'')+'</div><table class="rp-day-tbl">'+
+        row('☕','Breakfast',b.brk)+row('🌅','Morning',b.am)+row('🍽','Lunch',b.lun)+row('☀️','Afternoon',b.pm)+row('🌙','Evening',b.eve)+row('🌃','Night',b.ngt)+row('🚇','Transport',b.trn)+row('💰','Est. cost',b.cost)+row('💡','Pro tip',b.tip)+
+        '</table></div>';
+    }).join('')+'</section>';
+  }
+
+  // Budget section
+  var budgetHTML='';
+  if(_BDG){
+    var b=_BDG,p=BDG_P||'solo',tk=BDG_T||'mid_hotel',nn=b.nights||7;
+    var ac=(b.accommodation_per_night||{})[tk]||{},fd=(b.food_per_day||{}).mid||{},tr=(b.transport_per_day||{}).mid||{};
+    var en=(b.entertainment_per_day||{}).mid||{},ms=b.misc_per_day||{},fl=(b.flights_roundtrip||{}).economy||{};
+    var flA=fl[p]||0,acA=(ac[p]||0)*nn,fdA=(fd[p]||0)*nn,trA=(tr[p]||0)*nn,enA=(en[p]||0)*nn,msA=(ms[p]||0)*nn;
+    var vsA=(b.visa_fees_per_person||0)*(p==='family4'?4:p==='couple'?2:1);
+    var inA=(b.insurance_per_person||0)*(p==='family4'?4:p==='couple'?2:1);
+    var entry=(b.entry_fees_total_per_person||0)*(p==='family4'?4:p==='couple'?2:1);
+    var grand=flA+acA+fdA+trA+enA+entry+msA+vsA+inA;
+    budgetHTML='<section class="rp-sec"><h2>💰 Budget Breakdown ('+({solo:'Solo',couple:'Couple',family4:'Family of 4'}[p])+' · '+nn+' nights)</h2>'+
+      '<table class="rp-tbl"><thead><tr><th>Item</th><th>Detail</th><th style="text-align:right">USD</th></tr></thead><tbody>'+
+      '<tr><td>Round-trip Flights</td><td>Economy</td><td style="text-align:right">$'+flA.toLocaleString()+'</td></tr>'+
+      '<tr><td>Accommodation</td><td>'+nn+' nights</td><td style="text-align:right">$'+acA.toLocaleString()+'</td></tr>'+
+      '<tr><td>Food</td><td>$'+(fd[p]||0)+'/day</td><td style="text-align:right">$'+fdA.toLocaleString()+'</td></tr>'+
+      '<tr><td>Local Transport</td><td>$'+(tr[p]||0)+'/day</td><td style="text-align:right">$'+trA.toLocaleString()+'</td></tr>'+
+      '<tr><td>Entertainment</td><td>$'+(en[p]||0)+'/day</td><td style="text-align:right">$'+enA.toLocaleString()+'</td></tr>'+
+      '<tr><td>Entry Fees</td><td>Per person total</td><td style="text-align:right">$'+entry.toLocaleString()+'</td></tr>'+
+      '<tr><td>Misc</td><td>$'+(ms[p]||0)+'/day</td><td style="text-align:right">$'+msA.toLocaleString()+'</td></tr>'+
+      '<tr><td>Visa Fees</td><td>Per person</td><td style="text-align:right">$'+vsA.toLocaleString()+'</td></tr>'+
+      '<tr><td>Travel Insurance</td><td>Per person</td><td style="text-align:right">$'+inA.toLocaleString()+'</td></tr>'+
+      '</tbody></table>'+
+      '<div class="rp-total"><div>ESTIMATED TOTAL</div><div class="rp-total-amt">$'+grand.toLocaleString()+'</div></div>'+
+      '</section>';
+  }
+
+  // Links (contacts) section
+  var linksHTML='';
+  var ls=AS['links'];
+  if(ls&&ls.status==='done'&&ls.content){
+    try{
+      var rw=ls.content.replace(/<[^>]+>/g,' ').replace(/```json|```/gi,'').trim();
+      var si=rw.indexOf('{'),ei=rw.lastIndexOf('}');if(si>=0&&ei>si)rw=rw.slice(si,ei+1);
+      rw=rw.replace(/,(\s*[}\]])/g,'$1');
+      var d=JSON.parse(rw);
+      var aRows=(d.airlines||[]).map(function(a){return'<tr><td>'+(a.name||'')+'</td><td>'+(a.category||'')+'</td><td>'+(a.route||'')+(a.hub?' via '+a.hub:'')+'</td><td>'+(a.fare_from_usd||'')+'</td><td>'+(a.booking||'')+'</td></tr>';}).join('');
+      var hRows=(d.hotels||[]).map(function(h){return'<tr><td>'+(h.name||'')+'</td><td>'+(h.tier||'')+'</td><td>'+(h.area||'')+'</td><td>'+(h.price_usd_night||'')+'</td><td>'+(h.booking||h.direct||'')+'</td></tr>';}).join('');
+      linksHTML='<section class="rp-sec"><h2>🔗 Booking Directory</h2>'+
+        (aRows?'<h3>Airlines</h3><table class="rp-tbl"><thead><tr><th>Airline</th><th>Type</th><th>Route</th><th>From</th><th>Website</th></tr></thead><tbody>'+aRows+'</tbody></table>':'')+
+        (hRows?'<h3>Hotels</h3><table class="rp-tbl"><thead><tr><th>Hotel</th><th>Tier</th><th>Area</th><th>$/night</th><th>Website</th></tr></thead><tbody>'+hRows+'</tbody></table>':'')+
+        '</section>';
+    }catch(e){}
+  }
+
+  var today=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  var css='body{font-family:-apple-system,Segoe UI,Arial,sans-serif;max-width:820px;margin:0 auto;padding:30px;color:#1e293b;line-height:1.55;font-size:12px}'+
+    '.rp-cov{background:linear-gradient(135deg,#0f172a,#1e40af,#0891b2);color:#fff;padding:40px 32px;border-radius:14px;margin-bottom:24px}'+
+    '.rp-cov h1{font-size:32px;margin:0 0 6px;letter-spacing:-.02em}'+
+    '.rp-cov .sub{font-size:14px;opacity:.85;margin-bottom:18px}'+
+    '.rp-cov .meta{display:flex;gap:24px;flex-wrap:wrap;font-size:11px;opacity:.9}'+
+    '.rp-cov .meta span{display:inline-flex;align-items:center;gap:6px}'+
+    '.rp-toc{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:12px}'+
+    '.rp-toc h3{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#64748b}'+
+    '.rp-toc ol{margin:0;padding-left:22px;columns:2;column-gap:24px}.rp-toc li{margin:3px 0}'+
+    '.rp-sec{margin:22px 0;page-break-inside:avoid}'+
+    '.rp-sec h2{font-size:17px;color:#0f172a;border-bottom:2px solid #3b82f6;padding-bottom:6px;margin:0 0 12px}'+
+    '.rp-sec h3{font-size:13px;color:#1e3a5f;margin:14px 0 6px}'+
+    '.rp-sec h4,.rp-body h4{font-size:12px;margin:10px 0 4px;color:#0f172a;font-weight:700}'+
+    '.rp-body{font-size:11.5px}'+
+    '.rp-body ul{margin:4px 0 8px;padding-left:18px}.rp-body li{margin:2px 0}'+
+    '.rp-body table{width:100%;border-collapse:collapse;margin:8px 0;font-size:10.5px}'+
+    '.rp-body th{background:#0f172a;color:#fff;padding:6px 8px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.04em}'+
+    '.rp-body td{padding:5px 8px;border-bottom:1px solid #f1f5f9;vertical-align:top}'+
+    '.rp-body .md-tbl-wrap{overflow:visible;border:none;margin:6px 0}'+
+    '.rp-body .md-tbl{width:100%;border-collapse:collapse}'+
+    '.rp-body .md-tbl th{background:#1e3a5f;color:#fff;padding:6px 8px;font-size:9.5px;text-align:left}'+
+    '.rp-body .md-tbl td{padding:5px 8px;border-bottom:1px solid #e2e8f0;font-size:10.5px}'+
+    '.rp-tbl{width:100%;border-collapse:collapse;margin:8px 0;font-size:10.5px}'+
+    '.rp-tbl th{background:#0f172a;color:#fff;padding:7px 9px;text-align:left;font-size:10px}'+
+    '.rp-tbl td{padding:6px 9px;border-bottom:1px solid #f1f5f9}'+
+    '.rp-total{background:#f0fdf4;border:2px solid #86efac;border-radius:8px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin:14px 0;font-weight:700;color:#166534}'+
+    '.rp-total-amt{font-size:22px;font-weight:900}'+
+    '.rp-day{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin:10px 0;page-break-inside:avoid}'+
+    '.rp-day-hdr{display:flex;gap:10px;align-items:baseline;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #e2e8f0}'+
+    '.rp-day-num{background:#3b82f6;color:#fff;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:700}'+
+    '.rp-day-ttl{font-size:13px;font-weight:700;color:#0f172a}'+
+    '.rp-day-date{font-size:10px;color:#64748b;margin-left:auto}'+
+    '.rp-day-tbl{width:100%;border-collapse:collapse;font-size:11px}'+
+    '.rp-day-tbl td{padding:4px 0;vertical-align:top;border:none;line-height:1.4}'+
+    '.rp-itim{width:90px;font-weight:700;color:#475569;white-space:nowrap}'+
+    '.rp-foot{margin-top:30px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:9.5px;color:#94a3b8;text-align:center;line-height:1.7}'+
+    '@media print{body{padding:0;max-width:none}.rp-cov{border-radius:0}.rp-sec{break-inside:avoid}}'+
+    '@page{margin:12mm 10mm}';
+
+  // Build TOC
+  var tocItems=[];
+  AGENTS.forEach(function(a){if(AS[a.id]&&AS[a.id].status==='done'&&a.id!=='links')tocItems.push(a.icon+' '+a.name);});
+  if(itinHTML)tocItems.push('📅 Day-by-Day Itinerary');
+  if(budgetHTML)tocItems.push('💰 Budget Breakdown');
+  if(linksHTML)tocItems.push('🔗 Booking Directory');
+
+  var fullDoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>TravelMind Report · '+DEST+'</title><style>'+css+'</style></head><body>'+
+    '<div class="rp-cov"><h1>'+DEST+'</h1><div class="sub">AI-Researched Travel Intelligence Report</div>'+
+    '<div class="meta"><span>✈️ From '+(FROM||'—')+'</span><span>👤 '+(PROFILE.charAt(0).toUpperCase()+PROFILE.slice(1))+' traveler</span><span>🌙 '+nights+' nights</span><span>📅 '+today+'</span></div></div>'+
+    '<div class="rp-toc"><h3>Contents</h3><ol>'+tocItems.map(function(t){return'<li>'+t+'</li>';}).join('')+'</ol></div>'+
+    agentsHTML+itinHTML+budgetHTML+linksHTML+
+    '<div class="rp-foot">Generated by TravelMind AI · '+today+'<br>Budgetary estimates for planning only. Prices are approximate USD and vary by date, season and availability. Always verify flight availability, hotel rates, and visa requirements through official sources before booking.</div>'+
+    '</body></html>';
+
+  var w=window.open('','_blank');
+  if(!w){alert('Please allow pop-ups to download the PDF report.');return;}
+  w.document.write(fullDoc);w.document.close();
+  setTimeout(function(){try{w.focus();w.print();}catch(e){}},800);
 }
 
 function exportBudgetQuote(){
